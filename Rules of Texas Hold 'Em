@@ -1,0 +1,110 @@
+Rules of Texas Hold 'em
+
+Every player is given 2 cards, which will be their hand. Only they can use these cards to form different sets
+There are 10 kinds of sets, each made up of different cards. I will be ranking them form worst(10) to best(1) below
+
+A player uses the highest ranking set they can form with their hand and the table's communal cards(explained later)
+to use at the end to win. The best set wins the round. Play normally continues until one wishes to leave or has run out of 
+money, however here every round is considered a game. There is no fake currency to gamble, this is just used for calculating
+probability of obtaining different sets and winning hands
+
+A card consits of a suit and value. 
+Suits - These determine the group or "suit" a card is a part of
+    1. Heart
+    2. Spade
+    3. Diamond
+    4. Club
+
+Values - These determine how good a card is. Higher is better with the exception of the ace (So 2 < 9 < Jack < King < Ace)
+    1. Ace
+    2. Two
+    3. Three
+    4. Four
+    5. Five
+    6. Six
+    7. Seven
+    8. Eight
+    9. Nine
+    10. Ten
+    11. Jack
+    12. Queen
+    13. King
+
+Ace is unique. It takes the place of a one card, however it's value is considered the highest of all cards. When forming 
+different sets in can be used in plcae of a one or fourteen. That being said, a ace cannot be used to connect a king and 
+two. The ace can serve as a one or fourteen, but cannot link two and thirteen by being both one and fourteen. It must be 
+one of the values, not both.
+
+There is only one card with every suit value pair, for a total of 52 cards (4 * 13 = 52)
+
+When I say cards the player has available, it means the two cards in their hand and whatever cards are on the table
+
+Sets
+10. High Card - The highest card the player has available
+9. Pair - When the player has two of the same cards avialable (8 hearts, 8 clubs)
+8. Two Pair - When a player can form two pairs with the cards avialable (10 diamonds, 10 clubs, Jack clubs, Jack hearts)
+7. Three of a Kind - When a player has three cards of the same value available (7 hearts, 7 clubs, 7 spades)
+6. Straight - When the player has 5 cards available which form a striaght path (Ace->Two->Three->Four->Five 
+    or Ten->Jack->Queen->King->Ace)
+5. Flush - When the player has 5 cards available all of the same suit (2 hearts, 3 hearts, 7 hearts, Queen hearts,
+    Ace hearts)
+4. Full House - When the player has both a pair and a three of a kind (Ace hearts, Ace spade, 6 hearts, 6 diamonds, 
+    6 spades)
+3. Four of a Kind - When the player has all four cards of a given value available (6 hearts, 6 spades, 6 diamonds, 6 clubs)
+2. Straight Flush - When a player has five cards which follow the rules of both a striaght and flush
+1. Royal Flush - When the player has the 5 highest ranked cards(10 - Ace) and it follows the striaght flush rules
+
+In the event where the best set is shared by both players (Both of two pairs) the winner is decided by who has the highest
+value card in their set. So if one player has a pair of 8s and one has a pair of 4s, the one who has a pair of 8s wins.
+If one player has a straight from 6-10 and one has a straight from 8-Queen the 8-Queen player wins
+
+How to form sets
+Sets are formed through the two cards the player has access to and the cards placed on the table
+The turn order goes as follows
+1. Pre-Flop - Players get their hands, then bet
+2. Flop - One card is burnt (or removed from play without knowing the value) and three are placed on the table, then bet
+3. Turn - One card is burnt and one is placed on the table, then bet
+4. River - One card is burnt and one is placed on the table, then bet
+5. Showdown - Players reveal their hands and the winner is determined 
+
+During each round (except the showdown) a player is given access to more cards to form a sets. At no point can a player change
+their hand or the cards on the table. They must form these sets with what they are given
+
+Example Round (excluding betting)
+Player 1 - John
+Player 2 - Sara
+
+Pre-Flop 
+    John gets the 4 of diamonds and 4 of spades, forming a pair
+    Sara gets the 9 of spades and Jack of spades, giving her high card of Jack
+
+Flop
+    A card is burnt, and the three revealed cards are a 4 of clubs, ten of spades, ace of diamond
+    John now has three of a kind, as he has three fours
+    Sara now has high card of Ace
+
+Turn
+    A card is burnt, and the revelead card is a 8 of spades
+    John still only has his three of a kind
+    Sara only has her high card of ace, but with a 8 of spades, 9 of spades, 10 of spades and Jack of spades avialable she 
+    almost has a straight flush
+
+River
+    A card is burnt, and the revelead card is a 4 of hearts
+    John now has four of a kind, with all four of the fours available to him
+    Sara did not get her straight flush, leaving her with a Ace high
+
+Showdown
+    Both players reveal their cards
+    John wins, as four of a kind ranks higher then a Ace high
+
+In the event where both players have equal value sets as their highest card (such as four aces being dealt on the table)
+the players use their hands highest card to find the winner. If the last remaining card on the table either the highest card
+or tied with the highest card a player has, the round is a tie and the pot (betting pool) is split evenly 
+
+Generally in the event when two sets are equal, there will be a inequality eventually
+If  both players have full houses, and both use three eights for the three of a kind portion, then whoever has the higher
+pair portion wins
+If both player have flushes, then whoever can make the highest value group of five cards wins the hand
+
+If you still do not understand you can read more here https://en.wikipedia.org/wiki/Texas_hold_%27em#Rules
