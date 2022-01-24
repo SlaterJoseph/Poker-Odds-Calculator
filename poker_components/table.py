@@ -5,7 +5,6 @@ print(__name__)
 
 class Table(object):
     table_dealer = Dealer() #initizalizing the dealer
-    table_deck = table_dealer.get_deck() #we initizalize the table's deck
     player_list = [] #this list will contain all players
     cards_in_play = [] #these are the communal cards everyone can use to form hands
     
