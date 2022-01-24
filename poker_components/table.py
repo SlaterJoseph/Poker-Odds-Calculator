@@ -51,7 +51,6 @@ class Table(object):
         self.cards_in_play.append(self.table_dealer.deal_turn_river()) #adds the river to the communal cards
 
     def __str__(self):
-        # to_return = "\nPlayers\n"
         to_return = ""
         for x in range(len(self.player_list)):
             to_return += str(self.player_list[x])

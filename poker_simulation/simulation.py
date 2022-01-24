@@ -1,4 +1,4 @@
-from ..poker_components import poker_components
+from ..poker_components.table import Table
 
 class simulation:
 

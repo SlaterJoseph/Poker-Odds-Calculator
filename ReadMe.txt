@@ -1,4 +1,3 @@
-
 This is my poker odds calculator
 
 It is based on the variant Texas Hold 'em, and if you are unfamiliar with the rules go to the Rules Of Texas Hold 'em 
