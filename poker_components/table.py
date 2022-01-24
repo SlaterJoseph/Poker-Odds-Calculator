@@ -71,3 +71,14 @@ class Table(object):
         self.add_player('C')
         self.add_player('D')
         self.play_hand()
+
+    def find_selected_player(self):
+        for x in self.player_list:
+            if(x.get_focus()):
+                return x
+
+    def return_cards(self):
+        cards = []
+        cards.extend(self.find_selected_player.get_hand())
+        cards.extend(self.cards_in_play)
+        return cards
