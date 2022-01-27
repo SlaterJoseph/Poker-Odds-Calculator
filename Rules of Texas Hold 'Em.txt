@@ -1,9 +1,13 @@
 Rules of Texas Hold 'em
 
 Terms
-Hand - The two cards a player is holding OR the group of cards they can form
+Hand / Hole Cards - The two cards a player is holding
+Hand - The two cards a player is holding OR the group of cards they can form (I use the term hand for both)
 Suit - The group a card falls into (Hearts, Spades, Diamonds, Clubs)
 Rank / Value - The number / Royalty on the card (Ace -> King)
+Suited - When a player's hand are of the same suit (7 hearts, 8 hearts)
+Pocket Pair - When a player's hand has the same ranked (7 hearts, 7 spades)
+Community Cards - The cards on the table everyone has access to 
 
 Every player is given 2 cards, which will be their hand. Only they can use these cards to form different hands
 There are 10 kinds of hands, each made up of different cards. I will be ranking them from worst(10) to best(1) below
