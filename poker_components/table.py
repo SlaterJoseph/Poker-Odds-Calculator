@@ -1,9 +1,7 @@
 from dealer import Dealer
 from player import Player
 
-print(__name__)
-
-class Table(object):
+class Table:
     table_dealer = Dealer() #initizalizing the dealer
     player_list = [] #this list will contain all players
     cards_in_play = [] #these are the communal cards everyone can use to form hands

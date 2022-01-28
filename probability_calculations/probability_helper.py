@@ -12,3 +12,7 @@ def calculate_rounds_to_num(rounds):
 
 def caluclate_probability(n, k): #n!/k!(n-k)! n is the whole pool, k is the number of a item being searched for
     return math.factorial(n)/(math.factorial(k) * math.factorial (n - k))
+
+def truncate(number) -> float: #cuts the number off at 6 decmial spaces
+    stepper = 10.0 ** 6
+    return math.trunc(stepper * number) / stepper

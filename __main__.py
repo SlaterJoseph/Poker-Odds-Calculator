@@ -1,3 +1,5 @@
+print(dir(__package__))
+
 def main():
     pass
 

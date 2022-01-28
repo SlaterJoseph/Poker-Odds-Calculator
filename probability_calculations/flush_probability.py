@@ -1,4 +1,4 @@
-from ..poker_components.card import Card
+from probability_helper import truncate
 
 def calculate_flush(hand, table, round): #a list of all the probabilities is returned 
     if round == 'preflop': #the player has just his hand
@@ -22,6 +22,7 @@ def calculate_flush(hand, table, round): #a list of all the probabilities is ret
 
         else:
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table), river(hand, table)] 
+
     else:
         if turn(hand, table[0:3]) == 100: #checks if the flop contained a flush
             probability = [flop(hand), 100, 100, 100] 
@@ -41,7 +42,7 @@ def calculate_flush(hand, table, round): #a list of all the probabilities is ret
 def flop(hand):
     suits = {hand[0].get_suit(), hand[1].get_suit()} #a set of the suits
     if(len(suits) == 1): #the hand has to be suited(matching suits)
-        return 165 / 19600
+        return truncate(165 / 19600) #Flush - 1
 
     else: #if the hand is not of matching suit there cannot be a flush on the flop
         return 0
@@ -54,10 +55,10 @@ def turn(hand, table = 'n/a'):
     if table == 'n/a': #no community cards are avialable yet
 
         if suits['heart'] == 2 or suits['club'] == 2 or suits['spade'] == 2 or suits['diamond'] == 2: #suited hand 
-            flush_turn = 5 * 3 * 13 / 19600 + 9 / 47
+            flush_turn = 55 * 3 * 13 / 19600 * 9 / 47 #Flush - 2
 
         else: #unsuited hand
-            flush_turn = (220 / 19600) * (9 / 47)
+            flush_turn = (2 * 220 / 19600) * (9 / 47) #Flush - 3
 
     else: #community cards avialable
         suits[table[0].get_suit()] += 1 #adding the suits of the community cards
@@ -68,12 +69,12 @@ def turn(hand, table = 'n/a'):
             return 100
         #on of the suits has 4, so there is a flush draw
         elif suits['heart'] == 4 or suits['club'] == 4 or suits['spade'] == 4 or suits['diamond'] == 4:
-            flush_turn = 9 / 47
+            flush_turn = 9 / 47 #Flush - 4
 
         else: #no flush is possible on the turn
             return 0
 
-    return flush_turn if flush_turn < 100 else 100 #if we get over 100, it means there is a flush somewhere
+    return truncate(flush_turn) #if we get over 100, it means there is a flush somewhere
 
 def river(hand, table = 'n/a'):
     flush_river = 0
@@ -82,12 +83,12 @@ def river(hand, table = 'n/a'):
     suits[hand[1].get_suit()] += 1
     if table == 'n/a':
         if suits['heart'] == 2 or suits['club'] == 2 or suits['spade'] == 2 or suits['diamond'] == 2: #suited hand 
-            flush_river = (55 + 39) / 19600 * (38 / 47) * (9 / 46)
+            flush_river = (55 + 39) / 19600 * (38 / 47) * (9 / 46) #Flush - 5
             flush_river += (11 * 741) / 19600 * (10 / 47) * (9 / 46)
 
         else: #unsuited hand
-            flush_river = (220 / 19600) * (39 / 47) * (9 / 46)
-            flush_river += ((66 * 39) / 19600) * (10 / 48) * (9 / 46)
+            flush_river = (2 * 220 / 19600) * (38 / 47) * (9 / 46) #Flush - 6
+            flush_river += ((2 * 66 * 38) / 19600) * (10 / 48) * (9 / 46)
 
     elif len(table) == 3: #flop cards avialable
         suits[table[0].get_suit()] += 1 #adding the suits of the community cards
@@ -99,14 +100,16 @@ def river(hand, table = 'n/a'):
 
         #one of the suits has 4, so there is a flush draw, and we do not want the turn to be the flush
         elif suits['heart'] == 4 or suits['club'] == 4 or suits['spade'] == 4 or suits['diamond'] == 4: 
-            flush_river = (39 / 47) * (9 / 46)
+            flush_river = (38 / 47) * (9 / 46) #Flush - 7
 
         #one of the suits has 3, so we need both the turn and river to be of the same suit
-        if suits['heart'] == 5 or suits['club'] == 5 or suits['spade'] == 5 or suits['diamond'] == 5: 
-            flush_river = (10 / 47) * (9 / 46)
+        elif suits['heart'] == 3 or suits['club'] == 3 or suits['spade'] == 3 or suits['diamond'] == 3: 
+            flush_river = (10 / 47) * (9 / 46) #Flush - 8
 
         else: #a flush is no longer possible
             return 0
+
+        return truncate(flush_river)
 
     else: #flop and turn avialable
         suits[table[0].get_suit()] += 1 #adding the suits of the community cards
@@ -119,9 +122,9 @@ def river(hand, table = 'n/a'):
 
         #one of the suits has 4, so there is a flush draw
         elif suits['heart'] == 4 or suits['club'] == 4 or suits['spade'] == 4 or suits['diamond'] == 4: 
-            flush_river = (9 / 46)
+            flush_river = (9 / 46) #Flush - 9
             
-    return flush_river
+    return truncate(flush_river)
 
 def final_check(hand, table):
     suits = {'heart' : 0, 'spade' : 0, 'diamond' : 0, 'club' : 0} #a dictionary of the suits in the hand

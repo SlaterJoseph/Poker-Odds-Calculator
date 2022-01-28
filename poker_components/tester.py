@@ -1,7 +1,8 @@
 
-# from dealer import dealer
-# from player import player
-from table import table
+from dealer import Dealer
+from player import Player
+import poker_components
+from table import Table
 
 # card = card("heart", 10)
 # print(card)
@@ -29,7 +30,7 @@ from table import table
 # river = dealer.deal_turn_river()
 
 # print("\nRiver\n" + river)
-my_table = table()
-print(str(my_table))
-my_table.reset_round()
-print(str(my_table))
+# my_table = table()
+# print(str(my_table))
+# my_table.reset_round()
+# print(str(my_table))
