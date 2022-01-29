@@ -6,9 +6,6 @@ class data_collection:
 
     def __init__(self):
         self.input_data()
-        for x in self.data:
-            print(x)
-
 
     def input_data(self):
         with open('data.txt') as f:
@@ -19,101 +16,82 @@ class data_collection:
             hand3 = []
             hand4 = [] 
             table_cards = []
-            while line:
-                if curr_line_count == 0:
-                    curr_line_count += 1
-                    hand1holder = line.split('$')
-                    for x in hand1holder:
-                        hand1.extend(x.split(':'))
+            while line: #This loop splits the line into the hands then send the hands to be processed
+                hand1holder = line.split('$') #splits the line of text into cards
+                hand1.extend(hand1holder[0].split(':')) #splits the 1st card into suit and rank
+                hand1.extend(hand1holder[1].split(':')) #splits the 2nd card into suit and rank
+                hand1.remove('\n')
+                line = f.readline()
 
-                    hand1.remove('\n')
-                    line = f.readline()
+                hand2holder = line.split('$')
+                hand2.extend(hand2holder[0].split(':'))
+                hand2.extend(hand2holder[1].split(':'))
+                hand2.remove('\n')
+                line = f.readline()
 
-                elif curr_line_count == 1:
-                    curr_line_count += 1
-                    hand2holder = line.split('$')
-                    for x in hand2holder:
-                        hand2.extend(x.split(':'))
+                hand3holder = line.split('$')
+                hand3.extend(hand3holder[0].split(':'))
+                hand3.extend(hand3holder[1].split(':'))
+                hand3.remove('\n')
+                line = f.readline()
 
-                    hand2.remove('\n')
-                    line = f.readline()
+                hand4holder = line.split('$')
+                hand4.extend(hand4holder[0].split(':'))
+                hand4.extend(hand4holder[1].split(':'))
+                hand4.remove('\n')
+                line = f.readline()
 
-                elif curr_line_count == 2:
-                    curr_line_count += 1
-                    hand3holder = line.split('$')
-                    for x in hand3holder:
-                        hand3.extend(x.split(':'))
+                tableHolder = line.split('$')
+                table_cards.extend(tableHolder[0].split(':'))
+                table_cards.extend(tableHolder[1].split(':'))
+                table_cards.extend(tableHolder[2].split(':'))
+                table_cards.extend(tableHolder[3].split(':'))
+                table_cards.extend(tableHolder[4].split(':'))
+                line = f.readline()
 
-                    hand3.remove('\n')
-                    line = f.readline()
-
-                elif curr_line_count == 3:
-                    curr_line_count += 1
-                    hand4holder = line.split('$')
-                    for x in hand4holder:
-                        hand4.extend(x.split(':'))
-
-                    hand4.remove('\n')
-                    line = f.readline()
-
-                else:
-                    tableHolder = line.split('$')
-                    for x in tableHolder:
-                        table_cards.extend(x.split(':'))
-                    line = f.readline()
-                    self.process_data(hand1, hand2, hand3, hand4, table_cards)
-                    table_cards.clear()
-                    hand1.clear()
-                    hand2.clear()
-                    hand3.clear()
-                    hand4.clear()
-                    curr_line_count = 0
+                self.process_data(hand1, hand2, hand3, hand4, table_cards)
+                table_cards.clear()
+                hand1.clear()
+                hand2.clear()
+                hand3.clear()
+                hand4.clear()
             
     def process_data(self, hand1, hand2, hand3, hand4, table_cards):
         processing = data_processing()
-        print('processing')
-        i = 0
-        while i < 4:
-            if i == 0:
-                if(hand1[1] == hand1[3]):
-                    self.data[0][1] += 1
-                else:
-                    self.data[0][0] += 1
+        if hand1[1] == hand1[3]:
+            self.data[0][1] += 1
+        else:
+            self.data[0][0] += 1
 
-                if(hand2[1] == hand2[3]):
-                    self.data[0][1] += 1
-                else:
-                    self.data[0][0] += 1
+        if hand2[1] == hand2[3]:
+            self.data[0][1] += 1
+        else:
+            self.data[0][0] += 1
 
-                if(hand3[1] == hand3[3]):
-                    self.data[0][1] += 1
-                else:
-                    self.data[0][0] += 1
+        if hand3[1] == hand3[3]:
+            self.data[0][1] += 1
+        else:
+            self.data[0][0] += 1
 
-                if(hand4[1] == hand4[3]):
-                    self.data[0][1] += 1
-                else:
-                    self.data[0][0] += 1
-             
-            elif i == 1:
-                flop = table_cards[0:6]
-                self.data[1][processing.set_up(hand1, flop)] += 1
-                self.data[1][processing.set_up(hand2, flop)] += 1
-                self.data[1][processing.set_up(hand3, flop)] += 1
-                self.data[1][processing.set_up(hand4, flop)] += 1
+        if hand4[1] == hand4[3]:
+            self.data[0][1] += 1
+        else:
+            self.data[0][0] += 1
 
-            elif i == 2:
-                turn = table_cards[0:8]
-                self.data[2][processing.set_up(hand1, turn)] += 1
-                self.data[2][processing.set_up(hand2, turn)] += 1
-                self.data[2][processing.set_up(hand3, turn)] += 1
-                self.data[2][processing.set_up(hand4, turn)] += 1
-            else:
-                river = table_cards[0:10]
-                self.data[3][processing.set_up(hand1, river)] += 1
-                self.data[3][processing.set_up(hand2, river)] += 1
-                self.data[3][processing.set_up(hand3, river)] += 1
-                self.data[3][processing.set_up(hand4, river)] += 1
-                
-            i += 1
+        flop = table_cards[0:6]#processing the hands after the flop is revealed
+        self.data[1][processing.set_up(hand1, flop)] += 1
+        self.data[1][processing.set_up(hand2, flop)] += 1
+        self.data[1][processing.set_up(hand3, flop)] += 1
+        self.data[1][processing.set_up(hand4, flop)] += 1
 
+        turn = table_cards[0:8]#processing the hands after the turn is revealed
+        self.data[2][processing.set_up(hand1, turn)] += 1
+        self.data[2][processing.set_up(hand2, turn)] += 1
+        self.data[2][processing.set_up(hand3, turn)] += 1
+        self.data[2][processing.set_up(hand4, turn)] += 1
+
+        river = table_cards[0:10]#processing the hands after the river is revealed
+        self.data[3][processing.set_up(hand1, river)] += 1
+        self.data[3][processing.set_up(hand2, river)] += 1
+        self.data[3][processing.set_up(hand3, river)] += 1
+        self.data[3][processing.set_up(hand4, river)] += 1

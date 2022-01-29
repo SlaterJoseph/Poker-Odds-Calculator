@@ -111,7 +111,7 @@ class data_processing:
         else:
             self.diamonds.add(int(rank))
 
-    def check_flush(self, rank): #This method check if the straight from above is also a flush
+    def check_flush(self, rank): #This method checks if the straight from above is also a flush
         if rank in self.spades and (rank + 1) in self.spades and (rank + 2) in self.spades and (rank + 3) in self.spades and (rank + 4) in self.spades:
             return True
         elif rank in self.hearts and (rank + 1) in self.hearts and (rank + 2) in self.hearts and (rank + 3) in self.hearts and (rank + 4) in self.hearts:
