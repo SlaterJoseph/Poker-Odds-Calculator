@@ -1,4 +1,4 @@
-#Poker Components
+# Poker Components
 
 This package contains all the parts of the raw poker game. Each module is detailed below, explaining the use of the module 
 and any methods contained in it.
@@ -10,20 +10,20 @@ It include:
     - dealer
     - table
 
-#card
+## card
     The card module is simple, only containing a Card class with suit and rank variables , along with getters for the suit 
     and rank
 
-#deck
+## deck
     The deck module is comprised of a Deck class. It has a method (build_deck) to build a deck (a list of cards), 
     assigning the proper variables to each card. It has a shuffle method (shuffle_deck), which clears the deck then runs 
     the build_deck method. It also contains a getter for the deck.
 
-#player
+## player
     The player module is comprised of a Player class. It has variables for the player's hand (2 personal cards), their name,
     and if they are the player in focus. It has a getter for all the variables, and a setter for just the focus variable.
 
-#dealer
+## dealer
     The dealer module is comprised of a Dealer class. It consists of a few methods which will be explained below. It also
     initializes it's own deck to be used for the game, and has a getter for the deck.
     - random_number - Generates a random number from 0 - Remaining cards in the deck
@@ -34,7 +34,7 @@ It include:
     - deal_turn_river - Calls burn_card, then draw_card, returning the card to be used in the turn or river 
     - shuffle_deck - Calls the deck's shuffle deck method
 
-#table
+## table
     The table module is comprised of a Table class. This module is essentially where everything combnies to form the game.
     It initializes a dealer, as well has a player list(player_list) and community card list(cards_in_play).
     The Table class' methods will be detailed below.
