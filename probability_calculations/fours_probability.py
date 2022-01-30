@@ -4,7 +4,7 @@ def calculate_fours(hand, table, round):
     if round == 'preflop': #the player has just his hand
         probability = [flop(hand), turn(hand), river(hand), flop(hand) + turn(hand) + river(hand)] 
     elif round == 'flop':
-        if turn(hand, table) == 100: #checks if the flop contained a four of a kind
+        if turn(hand, table[0:3]) == 100: #checks if the flop contained a four of a kind
             #the only probability now that should not have 100 is the flop, as before the flop happened we were unsure if
             #there would be a four of a kind
             probability = [flop(hand), 100, 100, 100] 
@@ -61,21 +61,6 @@ def turn(hand, table = 'n/a'):
         ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0}) #a dictionary of all values
 
     return fours_flop
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 def river(hand, table = 'n/a'):
     ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0}) #a dictionary of all values     

@@ -1,3 +1,5 @@
+#Poker Simulation
+
 This portion of the project was something I created on the side.
 
 Essentially, this package is for simulating poker games. The while loop in simulation decides how many times
