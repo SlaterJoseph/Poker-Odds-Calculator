@@ -4,11 +4,11 @@ This package contains all the parts of the raw poker game. Each module is detail
 and any methods contained in it.
 
 It include:
-    - card
-    - deck
-    - player
-    - dealer
-    - table
+    - card__
+    - deck__
+    - player__
+    - dealer__
+    - table__
 
 ## card
     The card module is simple, only containing a Card class with suit and rank variables , along with getters for the suit 
