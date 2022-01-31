@@ -10,7 +10,8 @@ def calculate_flush(hand, table, round): #a list of all the probabilities is ret
             probability = [flop(hand), 100, 100, 100] 
 
         else:
-            probability = [flop(hand), turn(hand, table), river(hand, table), turn(hand, table) + river(hand, table)] 
+            probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), \
+            turn(hand, table[0:3]) + river(hand, table[0:4])] 
 
     elif round == 'turn':
         if turn(hand, table[0:3]) == 100: #checks if the flop contained a flush
@@ -21,7 +22,7 @@ def calculate_flush(hand, table, round): #a list of all the probabilities is ret
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100] 
 
         else:
-            probability = [flop(hand), turn(hand, table[0:3]), river(hand, table), river(hand, table)] 
+            probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), river(hand, table[0:4])] 
 
     else:
         if turn(hand, table[0:3]) == 100: #checks if the flop contained a flush
@@ -39,7 +40,7 @@ def calculate_flush(hand, table, round): #a list of all the probabilities is ret
     return probability
 
 
-def flop(hand):
+def flop(hand): #Checks the probability for the flop
     suits = {hand[0].get_suit(), hand[1].get_suit()} #a set of the suits
     if(len(suits) == 1): #the hand has to be suited(matching suits)
         return truncate(165 / 19600) #Flush - 1
@@ -47,7 +48,7 @@ def flop(hand):
     else: #if the hand is not of matching suit there cannot be a flush on the flop
         return 0
 
-def turn(hand, table = 'n/a'):
+def turn(hand, table = 'n/a'): #Checks the probability for the turn
     flush_turn = 0
     suits = {'heart' : 0, 'spade' : 0, 'diamond' : 0, 'club' : 0} #a dictionary of the suits in the hand
     suits[hand[0].get_suit()] += 1 #adding the suits of the cards from the hand
@@ -55,10 +56,10 @@ def turn(hand, table = 'n/a'):
     if table == 'n/a': #no community cards are avialable yet
 
         if suits['heart'] == 2 or suits['club'] == 2 or suits['spade'] == 2 or suits['diamond'] == 2: #suited hand 
-            flush_turn = 55 * 3 * 13 / 19600 * 9 / 47 #Flush - 2
+            flush_turn = ((55 * 3 * 13) / 19600) * (9 / 47) #Flush - 2
 
         else: #unsuited hand
-            flush_turn = (2 * 220 / 19600) * (9 / 47) #Flush - 3
+            flush_turn = ((2 * 220) / 19600) * (9 / 47) #Flush - 3
 
     else: #community cards avialable
         suits[table[0].get_suit()] += 1 #adding the suits of the community cards
@@ -76,18 +77,18 @@ def turn(hand, table = 'n/a'):
 
     return truncate(flush_turn) #if we get over 100, it means there is a flush somewhere
 
-def river(hand, table = 'n/a'):
+def river(hand, table = 'n/a'): #Checks the probability for the river
     flush_river = 0
     suits = {'heart' : 0, 'spade' : 0, 'diamond' : 0, 'club' : 0} #a dictionary of the suits in the hand
     suits[hand[0].get_suit()] += 1 #adding the suits of the cards from the hand
     suits[hand[1].get_suit()] += 1
     if table == 'n/a':
         if suits['heart'] == 2 or suits['club'] == 2 or suits['spade'] == 2 or suits['diamond'] == 2: #suited hand 
-            flush_river = (55 + 39) / 19600 * (38 / 47) * (9 / 46) #Flush - 5
-            flush_river += (11 * 741) / 19600 * (10 / 47) * (9 / 46)
+            flush_river = ((55 + 39) / 19600) * (38 / 47) * (9 / 46) #Flush - 5
+            flush_river += ((11 * 741) / 19600) * (10 / 47) * (9 / 46)
 
         else: #unsuited hand
-            flush_river = (2 * 220 / 19600) * (38 / 47) * (9 / 46) #Flush - 6
+            flush_river = ((2 * 220) / 19600) * (38 / 47) * (9 / 46) #Flush - 6
             flush_river += ((2 * 66 * 38) / 19600) * (10 / 48) * (9 / 46)
 
     elif len(table) == 3: #flop cards avialable
@@ -126,7 +127,7 @@ def river(hand, table = 'n/a'):
             
     return truncate(flush_river)
 
-def final_check(hand, table):
+def final_check(hand, table): #Checks the probability at the end of the round
     suits = {'heart' : 0, 'spade' : 0, 'diamond' : 0, 'club' : 0} #a dictionary of the suits in the hand
     suits[hand[0].get_suit()] += 1 #adding the suits of the cards from the hand
     suits[hand[1].get_suit()] += 1

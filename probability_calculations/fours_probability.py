@@ -51,7 +51,7 @@ def flop(hand):
     return truncate(fours_flop)
 
 def turn(hand, table = 'n/a'):
-    fours_flop = 0
+    
 
     if table == 'n/a': #no community cards known yet
         cards = {hand[0].get_value(), hand[1].get_value()}

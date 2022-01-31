@@ -2,7 +2,7 @@
 from dealer import Dealer
 from player import Player
 import poker_components
-from table import Table
+from poker_table import Table
 
 # card = card("heart", 10)
 # print(card)

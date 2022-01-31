@@ -1,4 +1,7 @@
-import 
+import sys
+sys.path.append('../poker_components')
+
+from poker_table import Table
 
 class simulation:
 
