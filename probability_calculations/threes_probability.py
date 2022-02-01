@@ -37,100 +37,27 @@ def calculate_threes(hand, table, round):
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), 0]
 
     return probability
-
     
-
 def flop(hand):
     ranks = {hand[0].get_value(), hand[1].get_value()}
-    if len(ranks) == 1: #checks if the player's hand is pocket pairs
-        flop_threes = (2 * 1128) / 19600 #3 of a kind - 1
-    else: #if the two cards do not make a pair
-        flop_threes = ((2 * 3 * 48) / 19600) + ((11 * 4)/19600) #3 of a kind - 2
-
     return truncate(flop_threes)
 
 def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
-        ranks = {hand[0].get_value(), hand[1].get_value()}
-        if len(ranks) == 1: #player's hand is a pocket pair
-            turn_threes = ((17296 / 19600) * (2 / 47)) + (((12 * 6 * 44) / 19600) * (4 / 47))#3 of a kind - 3
-        else: #player's hand is not a pair
-            turn_threes = ((2 * 3 * 1128) / 19600) * (2 / 47)#3 of a kind - 4
-
+        
     else:
-        ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-        ranks[hand[0].get_value()] += 1#adds all avialable cards to the ranks dictionary 
-        ranks[hand[1].get_value()] += 1
-        ranks[table[0].get_value()] += 1
-        ranks[table[1].get_value()] += 1
-        ranks[table[2].get_value()] += 1
-        pair_count = process_dictionary(ranks, 2) #check how many pairs there are
-
-        if pair_count == 2: #There are 2 pairs the player has access to
-            turn_threes = 4 / 47 #3 of a kind - 5
-        elif pair_count == 1: #There is 1 pair the player has access to
-            turn_threes = 2 / 47 #3 of a kind - 6
-        else: #There are no pairs on the table, so a 3 of a kind is impossible
-            turn_threes = 0
-
+        
     return truncate(turn_threes)
-    
 
 def river(hand, table = 'n/a'):
     if table == 'n/a':
-        ranks = {hand[0].get_value(), hand[1].get_value()}
-        if len(ranks) == 1: #player's hand is a pocket pair
-            river_threes = (17296 / 19600) * (46 / 47) * (2 / 46) #3 of a kind - 7
-        else: #player's hand is not a pair
-            river_threes = ((2 * 3 * 1128) / 19600) * (46 / 47) * (2 / 46) \
-               + (17296 / 19600) * ((2 * 3) / 47) * (2 / 46)#3 of a kind - 8
 
     elif len(table) == 3:
-        ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-        ranks[hand[0].get_value()] += 1#adds all avialable cards to the ranks dictionary 
-        ranks[hand[1].get_value()] += 1
-        ranks[table[0].get_value()] += 1
-        ranks[table[1].get_value()] += 1
-        ranks[table[2].get_value()] += 1
-        pair_count = process_dictionary(ranks, 2) #check how many pairs there are
-
-        if pair_count == 1: #There are 1 pairs 
-            river_threes = (45 / 47) * (2 / 46) + ((3 * 3) / 47) * (2 / 46) #3 of a kind - 9
-        elif pair_count == 2: #There is 2 pair
-            river_threes = (43 / 47) * (4 / 46) + (3 / 47) * (2 / 46) #3 of a kind - 10
-        else: #There are no pairs
-            river_threes = ((5 * 3) / 47) * (2 / 46) #3 of a kind - 11
-
-    else:
-        ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-        ranks[hand[0].get_value()] += 1#adds all avialable cards to the ranks dictionary 
-        ranks[hand[1].get_value()] += 1
-        ranks[table[0].get_value()] += 1
-        ranks[table[1].get_value()] += 1
-        ranks[table[2].get_value()] += 1
-        ranks[table[3].get_value()] += 1
-        pair_count = process_dictionary(ranks, 2) #check how many pairs there are
-
-        if pair_count == 3: #There are 3 pairs
-            river_threes = 6 / 46 #3 of a kind - 12
-        elif pair_count == 2: #There are 2 pairs
-            river_threes = 4 / 46 #3 of a kind - 13
-        elif pair_count == 1: #There is 1 pair
-            river_threes = 2 / 46 #3 of a kind - 14
-        else: #There are no pairs yet
-            river_threes = 0
         
-
-
+    else:
+        
     return truncate(river_threes)
 
 def final_check(hand, table = 'n/a'):
-    ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-    ranks[hand[0].get_value()] += 1#adds all avialable cards to the ranks dictionary 
-    ranks[hand[1].get_value()] += 1
-    ranks[table[0].get_value()] += 1
-    ranks[table[1].get_value()] += 1
-    ranks[table[2].get_value()] += 1
-    ranks[table[3].get_value()] += 1
-    ranks[table[4].get_value()] += 1
+
     return 100 if process_dictionary(ranks, 3) >= 1 else 0
