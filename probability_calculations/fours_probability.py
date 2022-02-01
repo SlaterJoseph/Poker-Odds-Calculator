@@ -59,5 +59,12 @@ def river(hand, table = 'n/a'):
     return truncate(river_threes)
 
 def final_check(hand, table = 'n/a'):
-
-    return 100 if process_dictionary(ranks, 3) >= 1 else 0
+    ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
+    ranks[hand[0].get_value] += 1
+    ranks[hand[1].get_value] += 1
+    ranks[table[0].get_value] += 1
+    ranks[table[1].get_value] += 1
+    ranks[table[2].get_value] += 1
+    ranks[table[3].get_value] += 1
+    ranks[table[4].get_value] += 1
+    return 100 if process_matches(ranks, 4) >= 1 else 0

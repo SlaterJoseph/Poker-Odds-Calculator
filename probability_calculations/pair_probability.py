@@ -1,6 +1,5 @@
 from probability_helper import truncate, process_matches
 
-
 def calculate_pair(hand, table, round):
     if round == 'preflop':
         probability = [flop(hand), turn(hand), river(hand), flop(hand) + turn(hand) + river(hand)]
@@ -58,6 +57,13 @@ def river(hand, table = 'n/a'):
         
     return truncate(river_threes)
 
-def final_check(hand, table = 'n/a'):
-
-    return 100 if process_dictionary(ranks, 3) >= 1 else 0
+def final_check(hand, table):
+    ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
+    ranks[hand[0].get_value] += 1
+    ranks[hand[1].get_value] += 1
+    ranks[table[0].get_value] += 1
+    ranks[table[1].get_value] += 1
+    ranks[table[2].get_value] += 1
+    ranks[table[3].get_value] += 1
+    ranks[table[4].get_value] += 1
+    return 100 if process_matches(ranks, 2) >= 1 else 0
