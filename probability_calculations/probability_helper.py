@@ -17,9 +17,8 @@ def truncate(number) -> float: #cuts the number off at 6 decmial spaces
     stepper = 10.0 ** 6
     return math.trunc(stepper * number) / stepper
 
-def process_dictionary(dictionary, searching_num): #this method checks a dictionary of ranks, and increments a variable 
+def process_matches(dictionary, searching_num): #this method checks a dictionary of ranks, and increments a variable 
     #based on how many of those keys values match the searching_num
-
     checked_value = 0
     if(dictionary[1] == searching_num): checked_value += 1
     if(dictionary[2] == searching_num): checked_value += 1
@@ -35,3 +34,14 @@ def process_dictionary(dictionary, searching_num): #this method checks a diction
     if(dictionary[12] == searching_num): checked_value += 1
     if(dictionary[13] == searching_num): checked_value += 1
     return checked_value
+
+def process_flushes(dictionary, searching_num): #this method checks how many cards of a suit exist, and returns the counter
+    checked_value = 0
+    if(dictionary['heart'] == searching_num): checked_value += 1
+    if(dictionary['spade'] == searching_num): checked_value += 1
+    if(dictionary['club'] == searching_num): checked_value += 1
+    if(dictionary['diamond'] == searching_num): checked_value += 1
+    return checked_value
+
+def process_straights(dictionary, searching_num):#unsure how to do this as of now
+    pass

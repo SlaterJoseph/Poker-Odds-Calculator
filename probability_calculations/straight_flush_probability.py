@@ -1,5 +1,4 @@
-from probability_helper import truncate
-from probability_helper import process_dictionary
+from probability_helper import process_flushes, truncate
 
 def calculate_straight_flush(hand, table, round):
     if round == 'preflop':

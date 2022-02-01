@@ -1,5 +1,5 @@
-from probability_helper import truncate
-from probability_helper import process_dictionary
+from probability_helper import truncate, process_matches
+
 
 def calculate_threes(hand, table, round):
     if round == 'preflop':
