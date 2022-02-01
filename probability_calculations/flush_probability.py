@@ -40,14 +40,14 @@ def calculate_flush(hand, table, round):
     
 def flop(hand):
     ranks = {hand[0].get_value(), hand[1].get_value()}
-    return truncate(flop_threes)
+    return truncate(flop_flush)
 
 def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
         
     else:
         
-    return truncate(turn_threes)
+    return truncate(turn_flush)
 
 def river(hand, table = 'n/a'):
     if table == 'n/a':
@@ -56,7 +56,7 @@ def river(hand, table = 'n/a'):
         
     else:
         
-    return truncate(river_threes)
+    return truncate(river_flush)
 
 def final_check(hand, table = 'n/a'):
     suits = dict({'heart':0, 'spade':0, 'diamond':0, 'club':0})

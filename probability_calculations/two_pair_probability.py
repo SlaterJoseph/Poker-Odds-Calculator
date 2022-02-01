@@ -39,14 +39,14 @@ def calculate_two_pair(hand, table, round):
     
 def flop(hand):
     ranks = {hand[0].get_value(), hand[1].get_value()}
-    return truncate(flop_threes)
+    return truncate(flop_two_pair)
 
 def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
         
     else:
         
-    return truncate(turn_threes)
+    return truncate(turn_two_pair)
 
 def river(hand, table = 'n/a'):
     if table == 'n/a':
@@ -55,7 +55,7 @@ def river(hand, table = 'n/a'):
         
     else:
         
-    return truncate(river_threes)
+    return truncate(river_two_pair)
 
 def final_check(hand, table = 'n/a'):
     ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
