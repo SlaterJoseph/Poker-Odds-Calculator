@@ -43,9 +43,9 @@ def calculate_threes(hand, table, round):
 def flop(hand):
     ranks = {hand[0].get_value(), hand[1].get_value()}
     if len(ranks) == 1: #checks if the player's hand is pocket pairs
-        flop_threes = (2 * 1128) / 19600
+        flop_threes = (2 * 1128) / 19600 #3 of a kind - 1
     else: #if the two cards do not make a pair
-        flop_threes = (2 * 3 * 48) / 19600
+        flop_threes = ((2 * 3 * 48) / 19600) + ((11 * 4)/19600) #3 of a kind - 2
 
     return truncate(flop_threes)
 
@@ -53,9 +53,9 @@ def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
         ranks = {hand[0].get_value(), hand[1].get_value()}
         if len(ranks) == 1: #player's hand is a pocket pair
-            turn_threes = (17296 / 19600) * (2 / 47)
+            turn_threes = ((17296 / 19600) * (2 / 47)) + (((12 * 6 * 44) / 19600) * (4 / 47))#3 of a kind - 3
         else: #player's hand is not a pair
-            turn_threes = ((2 * 3 * 1128) / 19600) * (2 / 47)
+            turn_threes = ((2 * 3 * 1128) / 19600) * (2 / 47)#3 of a kind - 4
 
     else:
         ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
@@ -66,10 +66,10 @@ def turn(hand, table = 'n/a'):
         ranks[table[2].get_value()] += 1
         pair_count = process_dictionary(ranks, 2) #check how many pairs there are
 
-        if pair_count == 2: #There are 2 pairs the player hass access to
-            turn_threes = 4 / 47
+        if pair_count == 2: #There are 2 pairs the player has access to
+            turn_threes = 4 / 47 #3 of a kind - 5
         elif pair_count == 1: #There is 1 pair the player has access to
-            turn_threes = 2 / 47
+            turn_threes = 2 / 47 #3 of a kind - 6
         else: #There are no pairs on the table, so a 3 of a kind is impossible
             turn_threes = 0
 
@@ -80,10 +80,10 @@ def river(hand, table = 'n/a'):
     if table == 'n/a':
         ranks = {hand[0].get_value(), hand[1].get_value()}
         if len(ranks) == 1: #player's hand is a pocket pair
-            river_threes = (17296 / 19600) * (46 / 47) * (2 / 46)
+            river_threes = (17296 / 19600) * (46 / 47) * (2 / 46) #3 of a kind - 7
         else: #player's hand is not a pair
-            river_threes = ((2 * 3 * 1128) / 19600) * (46 / 47) * (2 / 46) + \
-                (17296 / 19600) * ((2 * 3) / 47) * (2 / 46)
+            river_threes = ((2 * 3 * 1128) / 19600) * (46 / 47) * (2 / 46) \
+               + (17296 / 19600) * ((2 * 3) / 47) * (2 / 46)#3 of a kind - 8
 
     elif len(table) == 3:
         ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
@@ -94,12 +94,12 @@ def river(hand, table = 'n/a'):
         ranks[table[2].get_value()] += 1
         pair_count = process_dictionary(ranks, 2) #check how many pairs there are
 
-        if pair_count == 2: #There are 2 pairs
-            river_threes = (43 / 47) * (4 / 46) + (3 / 47) * (2 / 46)
-        elif pair_count == 1: #There is 1 pair
-            river_threes = (45 / 47) * (2 / 46) + ((3 * 3) / 47) * (2 / 46)
+        if pair_count == 1: #There are 1 pairs 
+            river_threes = (45 / 47) * (2 / 46) + ((3 * 3) / 47) * (2 / 46) #3 of a kind - 9
+        elif pair_count == 2: #There is 2 pair
+            river_threes = (43 / 47) * (4 / 46) + (3 / 47) * (2 / 46) #3 of a kind - 10
         else: #There are no pairs
-            river_threes = ((5 * 3) / 47) * (2 / 46)
+            river_threes = ((5 * 3) / 47) * (2 / 46) #3 of a kind - 11
 
     else:
         ranks = dict({1:0 , 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
@@ -112,11 +112,11 @@ def river(hand, table = 'n/a'):
         pair_count = process_dictionary(ranks, 2) #check how many pairs there are
 
         if pair_count == 3: #There are 3 pairs
-            river_threes = 6 / 46
+            river_threes = 6 / 46 #3 of a kind - 12
         elif pair_count == 2: #There are 2 pairs
-            river_threes = 4 / 46
+            river_threes = 4 / 46 #3 of a kind - 13
         elif pair_count == 1: #There is 1 pair
-            river_threes = 2 / 46
+            river_threes = 2 / 46 #3 of a kind - 14
         else: #There are no pairs yet
             river_threes = 0
         

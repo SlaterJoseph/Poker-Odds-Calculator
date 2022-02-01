@@ -9,7 +9,6 @@ class data_collection:
 
     def input_data(self):
         with open('data.txt') as f:
-            curr_line_count = 0 #Every 5 lines is a round, the 1st 4 are players the 5th is the table
             line = f.readline()
             hand1 = []
             hand2 = [] 
