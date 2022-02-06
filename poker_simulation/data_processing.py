@@ -77,7 +77,7 @@ class data_processing:
    
         flush = False #this only check for straight flushes. It does not check for standard flushes
         straight = False
-        for x in ranks: #
+        for x in ranks: 
             try:
                 if ranks[x] >= 1:
                     if x > 10:

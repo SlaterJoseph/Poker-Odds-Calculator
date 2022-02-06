@@ -1,15 +1,5 @@
 import math
 
-def calculate_rounds_to_num(rounds):
-    if(rounds == 'start'):
-        return 2
-    elif(rounds == 'flop'):
-        return 5
-    elif(rounds == 'turn'):
-        return 6
-    elif(rounds == 'river'):
-        return 7
-
 def caluclate_probability(n, k): #n!/k!(n-k)! n is the whole pool, k is the number of a item being searched for
     return math.factorial(n)/(math.factorial(k) * math.factorial (n - k))
 
@@ -45,3 +35,27 @@ def process_flushes(dictionary, searching_num): #this method checks how many car
 
 def process_straights(dictionary, searching_num):#unsure how to do this as of now
     pass
+
+def build_ranks(hand, table, cards_in_play): #This function is to put all the card's ranks into a dictionary
+    #It exists to clean up the probability sections involving rank dicitonaries
+    ranks = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0}
+    ranks[hand[0].get_value()] += 1
+    ranks[hand[1].get_value()] += 1
+
+    if(cards_in_play == 3):
+        ranks[table[0].get_value()] += 1
+        ranks[table[1].get_value()] += 1
+        ranks[table[2].get_value()] += 1
+    elif(cards_in_play == 4):
+        ranks[table[0].get_value()] += 1
+        ranks[table[1].get_value()] += 1
+        ranks[table[2].get_value()] += 1
+        ranks[table[3].get_value()] += 1
+    else:
+        ranks[table[0].get_value()] += 1
+        ranks[table[1].get_value()] += 1
+        ranks[table[2].get_value()] += 1
+        ranks[table[3].get_value()] += 1
+        ranks[table[4].get_value()] += 1
+
+    return ranks

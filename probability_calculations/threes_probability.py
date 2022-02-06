@@ -1,4 +1,4 @@
-from probability_helper import truncate, process_matches
+from probability_helper import truncate, process_matches, build_ranks
 
 
 def calculate_threes(hand, table, round):
@@ -40,7 +40,7 @@ def calculate_threes(hand, table, round):
     
 def flop(hand):
     ranks = {hand[0].get_value(), hand[1].get_value()}
-    if len(ranks) == 1:
+    if len(ranks) == 1: #Our hand contains a pocket pair
         flop_threes = ((2 * 66 * 4 * 4) / 19600) + ((12 * 4) / 19600) * ((12 * 4) / 19600) \
         + ((2 * 12 * 6) / 19600)
     else:
@@ -51,18 +51,13 @@ def flop(hand):
 def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
         ranks = {hand[0].get_value(), hand[1].get_value()}
-        if len(ranks) == 1:
+        if len(ranks) == 1: #Our hand contains a pocket pair
             turn_threes = (((220 * 4 * 4 * 4) / 19600) * (2 / 47)) + (((66 * 6 * 4) / 19600) * (4 / 47))
         else:
             turn_threes = (((2 * 3 * 55 * 4 * 4) / 19600) * (2 / 47)) + (((3 * 3 * 11 * 4) / 19600) * (4 / 47)) \
             + (((2 * 3 * 11 * 6) / 19600) * (4 / 47)) + (((55 * 6 * 4) / 19600) * (2 / 47))
     else:
-        ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-        ranks[hand[0].get_value()] += 1
-        ranks[hand[1].get_value()] += 1
-        ranks[table[0].get_value()] += 1
-        ranks[table[1].get_value()] += 1
-        ranks[table[2].get_value()] += 1
+        ranks = build_ranks(hand, table, 3)
         if process_matches(ranks, 3) >= 1:
             turn_threes = 100
         elif process_matches(ranks, 2) == 2:
@@ -71,12 +66,13 @@ def turn(hand, table = 'n/a'):
             turn_threes = 2 / 47
         else:
             turn_threes = 0
+
     return truncate(turn_threes)
 
 def river(hand, table = 'n/a'):
     if table == 'n/a':
         ranks = {hand[0].get_value(), hand[1].get_value()}
-        if len(ranks) == 1:
+        if len(ranks) == 1: #Our hand contains a pocket pair
             river_threes = (((66 * 6 * 4) / 19600) * (3 / 47) * (6 / 46)) \
             + (((220 * 4 * 4 * 4) / 19600) * ((9 * 4) / 47) * (2 / 46))\
             + (((66 * 6 * 4) / 19600) * (10 / 47) * (4 / 46)) + (((220 * 4 * 4 * 4) / 19600) * ((3 * 3) / 47) * (4 / 46))
@@ -94,12 +90,7 @@ def river(hand, table = 'n/a'):
             + (((2 * 3 * 55 * 4 * 4) / 19600) * ((2 * 3) / 47) * (4 / 46))
 
     elif len(table) == 3:
-        ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-        ranks[hand[0].get_value()] += 1
-        ranks[hand[1].get_value()] += 1
-        ranks[table[0].get_value()] += 1
-        ranks[table[1].get_value()] += 1
-        ranks[table[2].get_value()] += 1
+        ranks = build_ranks(hand, table, 3)
         if process_matches(ranks, 2) == 2:
             river_threes = ((3 / 47) * (6 / 46)) + (((10 * 4) / 47) * (4 / 46))
         elif process_matches(ranks, 2) == 1:
@@ -107,15 +98,8 @@ def river(hand, table = 'n/a'):
         else:
             river_threes = ((5 * 3) / 47) * (2 / 46)
 
-
-    else:
-        ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-        ranks[hand[0].get_value()] += 1
-        ranks[hand[1].get_value()] += 1
-        ranks[table[0].get_value()] += 1
-        ranks[table[1].get_value()] += 1
-        ranks[table[2].get_value()] += 1
-        ranks[table[3].get_value()] += 1
+    else: #We have the turn avialable 
+        ranks = build_ranks(hand, table, 4)
         if process_matches(ranks, 2) == 3:
             river_threes = 6 / 46
         elif process_matches(ranks, 2) == 2:
@@ -127,12 +111,5 @@ def river(hand, table = 'n/a'):
     return truncate(river_threes)
 
 def final_check(hand, table = 'n/a'):
-    ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-    ranks[hand[0].get_value()] += 1
-    ranks[hand[1].get_value()] += 1
-    ranks[table[0].get_value()] += 1
-    ranks[table[1].get_value()] += 1
-    ranks[table[2].get_value()] += 1
-    ranks[table[3].get_value()] += 1
-    ranks[table[4].get_value()] += 1
+    ranks = build_ranks(hand, table, 5)
     return 100 if process_matches(ranks, 3) >= 1 else 0

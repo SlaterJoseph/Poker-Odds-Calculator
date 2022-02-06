@@ -1,4 +1,4 @@
-from probability_helper import truncate, process_matches
+from probability_helper import truncate, process_matches, build_ranks
 
 def calculate_pair(hand, table, round):
     ranks = {hand[0].get_value(), hand[1].get_value()}
@@ -42,7 +42,7 @@ def calculate_pair(hand, table, round):
     
 def flop(hand):
     ranks = {hand[0].get_value(), hand[1].get_value()}
-    if len(ranks) == 1:
+    if len(ranks) == 1: #Our hand contains a pocket pair
         flop_pair = 100
     else:
         flop_pair = ((6 * 55 * 4) / 19600) + ((11 * 6 * 2 * 3) / 19600) + ((2 * 6 * 11 * 4) / 19600) + \
@@ -53,7 +53,7 @@ def flop(hand):
 def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
         ranks = {hand[0].get_value(), hand[1].get_value()}
-        if len(ranks) == 1:
+        if len(ranks) == 1: #Our hand contains a pocket pair
             turn_pair = 100
         else:
             turn_pair = (5 * 3) / 47 #Pair - 2
@@ -69,17 +69,17 @@ def turn(hand, table = 'n/a'):
 def river(hand, table = 'n/a'):
     if table == 'n/a':
         ranks = {hand[0].get_value(), hand[1].get_value()}
-        if len(ranks) == 1:
+        if len(ranks) == 1: #Our hand contains a pocket pair
             river_pair = 100
         else:
-            river_pair = (6 * 3) / 46  #pair 4
+            river_pair = (6 * 3) / 46  #Pair - 4
 
     elif len(table) == 3:
         ranks = {hand[0].get_value(), hand[1].get_value(), table[0].get_value(), table[1].get_value(), table[2].get_value()}
         if len(ranks) < 5:
             river_pair = 100
         else:
-           river_pair = (6 * 3) / 46  #pair 5
+           river_pair = (6 * 3) / 46  #Pair - 5
     else:
         ranks = {hand[0].get_value(), hand[1].get_value(), table[0].get_value(), table[1].get_value(), table[2].get_value(),\
                 table[3].get_value()}
@@ -87,17 +87,10 @@ def river(hand, table = 'n/a'):
         if len(ranks) < 6:
             river_pair = 100
         else:
-           river_pair = (6 * 3) / 46  #pair 6
+           river_pair = (6 * 3) / 46  #Pair - 6
         
     return truncate(river_pair)
 
 def final_check(hand, table):
-    ranks = dict({1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0})
-    ranks[hand[0].get_value()] += 1
-    ranks[hand[1].get_value()] += 1
-    ranks[table[0].get_value()] += 1
-    ranks[table[1].get_value()] += 1
-    ranks[table[2].get_value()] += 1
-    ranks[table[3].get_value()] += 1
-    ranks[table[4].get_value()] += 1
+    ranks = build_ranks(hand, table, 5)
     return 100 if process_matches(ranks, 2) >= 1 else 0
