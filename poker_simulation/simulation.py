@@ -1,5 +1,5 @@
 import sys
-sys.path.append('c:\\Users\\josep\\VS Code Files\\Python Projects\\Poker Probability Calculator\\poker_components')
+sys.path.append()
 print(sys.path)
 
 from poker_table import Table

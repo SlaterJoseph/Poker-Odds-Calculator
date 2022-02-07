@@ -1,7 +1,12 @@
-# from card import card
 from card import Card
 
 class Deck:
+    """The class Deck contains all 52 cards. It initialize all 52 cards and puts them in a list. It contains 5 functions
+        __init__ (No parameters, but does call the build_deck fucntion)
+        build_deck (initializes all 52 cards and places them in the deck list)
+        __str__ (A to string function for testing purposes)
+        get_deck (A function which returns the deck list)
+        shuffle_deck (clears the deck list, then calls build_deck to rebuild it)"""
     the_deck = []
 
     def __init__(self): #the constructor calls the deck building method so the deck is build right away

@@ -1,14 +1,13 @@
 import math
 
-def caluclate_probability(n, k): #n!/k!(n-k)! n is the whole pool, k is the number of a item being searched for
-    return math.factorial(n)/(math.factorial(k) * math.factorial (n - k))
-
-def truncate(number) -> float: #cuts the number off at 6 decmial spaces
+def truncate(number) -> float:
+    """This function shortens floats to 6 decimal spaces"""
     stepper = 10.0 ** 6
     return math.trunc(stepper * number) / stepper
 
-def process_matches(dictionary, searching_num): #this method checks a dictionary of ranks, and increments a variable 
-    #based on how many of those keys values match the searching_num
+def process_matches(dictionary, searching_num):
+    """This function takes a dictionary and a number to search for, and if the number is found a counter is incremented.
+    The counter is then returned after checking all the ranks (1-13)"""
     checked_value = 0
     if(dictionary[1] == searching_num): checked_value += 1
     if(dictionary[2] == searching_num): checked_value += 1
@@ -25,7 +24,9 @@ def process_matches(dictionary, searching_num): #this method checks a dictionary
     if(dictionary[13] == searching_num): checked_value += 1
     return checked_value
 
-def process_flushes(dictionary, searching_num): #this method checks how many cards of a suit exist, and returns the counter
+def process_flushes(dictionary, searching_num):
+    """This function takes a dictionary of suits, and searches for a specific value (both parameters). If the value is found,
+    a counter is incremented, and once all suits are checked the counter is returned"""
     checked_value = 0
     if(dictionary['heart'] == searching_num): checked_value += 1
     if(dictionary['spade'] == searching_num): checked_value += 1
@@ -36,8 +37,9 @@ def process_flushes(dictionary, searching_num): #this method checks how many car
 def process_straights(dictionary, searching_num):#unsure how to do this as of now
     pass
 
-def build_ranks(hand, table, cards_in_play): #This function is to put all the card's ranks into a dictionary
-    #It exists to clean up the probability sections involving rank dicitonaries
+def build_ranks(hand, table, cards_in_play):
+    """This function builds a dictionary of ranks. It takes in all the cards in play, and then increments the value associated
+    with the key. Finally, once all the cards area added the dictionary is returned"""
     ranks = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0}
     ranks[hand[0].get_value()] += 1
     ranks[hand[1].get_value()] += 1
