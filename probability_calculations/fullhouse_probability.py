@@ -1,6 +1,5 @@
 from probability_helper import truncate, process_matches
 
-
 def calculate_full_house(hand, table, round):
     if round == 'preflop':
         probability = [flop(hand), turn(hand), river(hand), flop(hand) + turn(hand) + river(hand)]

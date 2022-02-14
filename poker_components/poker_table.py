@@ -2,6 +2,15 @@ from dealer import Dealer
 from player import Player
 
 class Table:
+    """This is the table class. It is where the game is actually played. It has 7 functions to
+        __init__ (No parameters, for now inserts 4 players and calls the play_hand function)
+        add_player (Takes a name as a parameter, calls the dealers deal_player function, then adds the player to the player
+        list. If there are no other player's the play is made the focus)
+        play_hand (Takes a input of the amount of players and initializes them, then gets the flop, turn and river)
+        __str__ (A to string function used for testing)
+        reset_round (The dealer calls it's shuffle_deck function, clears the player and card lists, then starts another ronud)
+        find_selected_player (Loops through the player list and returns the selected one)
+        return_cards(Makes a list of the selected players cards and all cards in the table, then returns said list)"""
     table_dealer = Dealer() #initizalizing the dealer
     player_list = [] #this list will contain all players
     cards_in_play = [] #these are the communal cards everyone can use to form hands

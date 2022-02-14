@@ -2,7 +2,7 @@ from card import Card
 
 class Deck:
     """The class Deck contains all 52 cards. It initialize all 52 cards and puts them in a list. It contains 5 functions
-        __init__ (No parameters, but does call the build_deck fucntion)
+        __init__ (No parameters, but does call the build_deck function)
         build_deck (initializes all 52 cards and places them in the deck list)
         __str__ (A to string function for testing purposes)
         get_deck (A function which returns the deck list)
