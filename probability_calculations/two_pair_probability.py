@@ -1,7 +1,7 @@
 from probability_helper import truncate, process_matches, build_ranks
 
 def calculate_two_pair(hand, table, round):
-    """This processes the probability of getting thwo pairs 
+    """This processes the probability of getting two pairs 
 
     There are parameters for the player's hand, table's cards and current round. Based on the round, a different if statement 
     contains the proper function calls, passing the right amount of card from the table. The hand is always passed"""
@@ -12,7 +12,6 @@ def calculate_two_pair(hand, table, round):
     elif round == 'flop': #The hand and 3 table cards are avialable
         if turn(hand, table[0:3]) == 100: #If the probabilty is 100, we found a two pairs on the flop
             probability = [flop(hand), 100, 100, 100] #no need to check the what the likelyhood is for future rounds
-
         else: #if there isn't a two pairs, we pass the table's first 3 cards and the hand to the methods
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:3]),\
                  turn(hand, table[0:3]) + river(hand, table[0:3])]
@@ -20,23 +19,18 @@ def calculate_two_pair(hand, table, round):
     elif round == 'turn': #The hand and 4 table cards are available
         if turn(hand, table[0:3]) == 100: #checks if the flop contained two pairs
             probability = [flop(hand), 100, 100, 100]
-
         elif river(hand, table[0:4]) == 100: #checks if the turn contained two pairs
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100]
-
         else: #There are not 2 pairs yet, so the hand and 4 table cards are passed
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), river(hand, table[0:4])]
 
     else: #The hand and all 5 table cards are avialable 
         if turn(hand, table[0:3]) == 100: #checks if the flop contained two pairs
             probability = [flop(hand), 100, 100, 100] 
-
         elif river(hand, table[0:4]) == 100: #checks if the turn contained two pairs
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100] 
-
         elif final_check(hand, table) == 100: #to see if by the end of the game there is two pairs
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), 100]
-
         else: #There was not two pairs, so the final check is 0
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), 0]
 

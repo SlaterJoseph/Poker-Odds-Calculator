@@ -61,3 +61,26 @@ def build_ranks(hand, table, cards_in_play):
         ranks[table[4].get_value()] += 1
 
     return ranks
+
+def build_flushes(hand, table, cards_in_play):
+    """This function builds a dictionary of suits. It takes in all the cards in play, and then increments the value associated
+    with the key. Finally, once all the cards area added the dictionary is returned"""
+    ranks = {'heart':0, 'spade':0, 'diamond':0, 'club':0}
+    ranks[hand[0].get_suit()] += 1
+    ranks[hand[1].get_suit()] += 1
+
+    if(cards_in_play == 3):
+        ranks[table[0].get_suit()] += 1
+        ranks[table[1].get_suit()] += 1
+        ranks[table[2].get_suit()] += 1
+    elif(cards_in_play == 4):
+        ranks[table[0].get_suit()] += 1
+        ranks[table[1].get_suit()] += 1
+        ranks[table[2].get_suit()] += 1
+        ranks[table[3].get_suit()] += 1
+    else:
+        ranks[table[0].get_suit()] += 1
+        ranks[table[1].get_suit()] += 1
+        ranks[table[2].get_suit()] += 1
+        ranks[table[3].get_suit()] += 1
+        ranks[table[4].get_suit()] += 1

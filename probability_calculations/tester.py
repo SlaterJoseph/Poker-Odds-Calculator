@@ -7,11 +7,6 @@ from threes_probability import calculate_threes
 from fours_probability import  calculate_fours
 from fullhouse_probability import calculate_full_house
 
-
-
-
-
-
 #testing pair
 # hand = [Card("heart", 1), Card("heart", 2)]
 # table = []
@@ -58,12 +53,12 @@ from fullhouse_probability import calculate_full_house
 
 
 #testing full house
-hand = [Card("heart", 1), Card("heart", 1)]
-table = []
-print(calculate_full_house(hand, table, "preflop"))
-table = [Card("heart", 1), Card("heart", 2), Card("heart", 3)]
-print(calculate_full_house(hand, table, "flop"))
-table.append(Card("heart", 1))
-print(calculate_full_house(hand, table, "turn"))
-table.append(Card("heart", 2))
-print(calculate_full_house(hand, table, "river"))
+# hand = [Card("heart", 1), Card("heart", 1)]
+# table = []
+# print(calculate_full_house(hand, table, "preflop"))
+# table = [Card("heart", 1), Card("heart", 2), Card("heart", 3)]
+# print(calculate_full_house(hand, table, "flop"))
+# table.append(Card("heart", 1))
+# print(calculate_full_house(hand, table, "turn"))
+# table.append(Card("heart", 2))
+# print(calculate_full_house(hand, table, "river"))

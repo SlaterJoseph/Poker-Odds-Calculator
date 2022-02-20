@@ -10,7 +10,6 @@ def calculate_pair(hand, table, round):
     elif round == 'flop':
         if turn(hand, table[0:3]) == 100: #If the probabilty is 100, we found a pair on the flop
             probability = [flop(hand), 100, 100, 100] #no need to check the what the likelyhood is for future rounds
-
         else: #if there isn't a three of a kind, we pass the table's first 3 cards and the hand to the methods
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:3]),\
                  turn(hand, table[0:3]) + river(hand, table[0:3])]
@@ -18,23 +17,18 @@ def calculate_pair(hand, table, round):
     elif round == 'turn':
         if turn(hand, table[0:3]) == 100: #checks if the flop contained a pair
             probability = [flop(hand), 100, 100, 100]
-
         elif river(hand, table[0:4]) == 100:#checks if the turn contained a pair
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100]
-
         else:
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), river(hand, table[0:4])]
 
     else:
         if turn(hand, table[0:3]) == 100: #checks if the flop contained a pair
             probability = [flop(hand), 100, 100, 100] 
-
         elif river(hand, table[0:4]) == 100: #checks if the turn contained a pair
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100] 
-
         elif final_check(hand, table) == 100: #to see if by the end of the game there is a pair
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), 100]
-
         else:
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), 0]
 

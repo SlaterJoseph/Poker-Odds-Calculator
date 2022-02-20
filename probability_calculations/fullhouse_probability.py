@@ -11,7 +11,6 @@ def calculate_full_house(hand, table, round):
     elif round == 'flop':
         if turn(hand, table[0:3]) == 100: #If the probabilty is 100, we found a full house
             probability = [flop(hand), 100, 100, 100] #no need to check the what the likelyhood is for future rounds
-
         else: #if there a full house, we pass the table's first 3 cards and the hand to the methods
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:3]),\
                  turn(hand, table[0:3]) + river(hand, table[0:3])]
@@ -19,23 +18,18 @@ def calculate_full_house(hand, table, round):
     elif round == 'turn':
         if turn(hand, table[0:3]) == 100: #checks if the flop contained a full house
             probability = [flop(hand), 100, 100, 100]
-
         elif river(hand, table[0:4]) == 100:#checks if the turn contained a full house
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100]
-
         else:
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), river(hand, table[0:4])]
 
     else:
         if turn(hand, table[0:3]) == 100: #checks if the flop contained a full house
             probability = [flop(hand), 100, 100, 100] 
-
         elif river(hand, table[0:4]) == 100: #checks if the turn contained a full house
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100] 
-
         elif final_check(hand, table) == 100: #to see if by the end of the game there is a full house
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), 100]
-
         else:
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), 0]
 
@@ -85,17 +79,14 @@ def river(hand, table = 'n/a'):
                 + (((220 * 4 * 4 * 4) / 19600) * (2 / 47) * ((3 * 3) / 46)) \
                 + (((66 * 2 * 6 * 4) / 19600) * ((10 * 4) / 47) * ((2 * 2) / 46)) \
                 + (((220 * 4 * 4 * 4) / 19600) * ((3 * 3) / 47) * ((2 * 2) / 46)) \
-                + (((12 * 4) / 19600) * ((11 * 4) / 47) * ((2 * 3) / 46)) \
-                + (((2 * 66 * 4 * 4) / 19600) * (1 / 47) * ((2 * 3) / 46)) 
+                + (((12 * 4) / 19600) * ((11 * 4) / 47) * ((2 * 3) / 46)) + (((2 * 66 * 4 * 4) / 19600) * (1 / 47) * ((2 * 3) / 46)) 
         else: #The hand is not a pocket pair
             river_full_house = (((2 * 3 * 11 * 4) / 19600) * ((10 * 32 / 47) * ((3 * 3) / 46))) \
                 + (((2 * 3 * 66 * 4 * 4) / 19600) * (2 / 47) * ((3 * 3) / 46)) + (((11 * 4) / 19600) * ((10 * 4) / 47) * ((3 * 3) / 46)) \
                 + (((55 * 2 * 6 * 4) / 19600) * ((2 * 3) / 47) * ((2 * 2) / 46)) + ((2 / 19600) * ((11 * 4) / 47) * ((2 * 3) / 46)) \
                 + (((2 * 3 * 11 * 4) / 19600) * (2 / 47) * ((2 * 3) / 46)) + (((3 * 3 * 11 * 4) / 19600) * (3 / 47) * ((3 * 2) / 46)) \
-                + (((2 * 3 * 11 * 6) / 19600) * (3 / 47) * ((3 * 2) / 46)) \
-+ (((11 * 4) / 19600) * (1 / 47) * ((2 * 3) / 46)) \
-                + (((55 * 2 * 6 * 4) / 19600) * (2 / 47) * ((3 * 3) / 46)) \
-                + (((2 * 3 * 55 * 4 * 4) / 19600) * ((2 * 3) / 47) * ((2 * 2) / 46)) \
+                + (((2 * 3 * 11 * 6) / 19600) * (3 / 47) * ((3 * 2) / 46)) + (((11 * 4) / 19600) * (1 / 47) * ((2 * 3) / 46)) \
+                + (((55 * 2 * 6 * 4) / 19600) * (2 / 47) * ((3 * 3) / 46)) + (((2 * 3 * 55 * 4 * 4) / 19600) * ((2 * 3) / 47) * ((2 * 2) / 46)) \
                 + (((11 * 6 * 2 * 3) / 19600) * ((10 * 4) / 47) * ((2 * 2) / 46)) 
 
     elif len(table) == 3: #Flop is available, turn is not
