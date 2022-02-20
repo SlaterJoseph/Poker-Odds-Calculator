@@ -6,6 +6,7 @@ from two_pair_probability import calculate_two_pair
 from threes_probability import calculate_threes
 from fours_probability import  calculate_fours
 from fullhouse_probability import calculate_full_house
+from royal_flush_probability import calculate_royal_flush
 
 #testing pair
 # hand = [Card("heart", 1), Card("heart", 2)]
@@ -62,3 +63,14 @@ from fullhouse_probability import calculate_full_house
 # print(calculate_full_house(hand, table, "turn"))
 # table.append(Card("heart", 2))
 # print(calculate_full_house(hand, table, "river"))
+
+#testing royal flush
+hand = [Card("heart", 10), Card("heart", 11)]
+table = []
+print(calculate_royal_flush(hand, table, "preflop"))
+table = [Card("heart", 1), Card("heart", 12), Card("heart", 13)]
+print(calculate_royal_flush(hand, table, "flop"))
+table.append(Card("heart", 1))
+print(calculate_royal_flush(hand, table, "turn"))
+table.append(Card("heart", 2))
+print(calculate_royal_flush(hand, table, "river"))
