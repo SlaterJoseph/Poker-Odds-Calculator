@@ -10,16 +10,16 @@ def calculate_flush(hand, table, round):
         probability = [flop(hand), turn(hand), river(hand), flop(hand) + turn(hand) + river(hand)]
 
     elif round == 'flop':
-        if turn(hand, table[0:3]) == 100: #If the probabilty is 100, we found a three of a kind on the flop
+        if turn(hand, table[0:3]) == 100: #If the probabilty is 100, we found a flush on the flop
             probability = [flop(hand), 100, 100, 100] #no need to check the what the likelyhood is for future rounds
-        else: #if there isn't a three of a kind, we pass the table's first 3 cards and the hand to the methods
+        else: #if there isn't a flush, we pass the table's first 3 cards and the hand to the methods
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:3]),\
                  turn(hand, table[0:3]) + river(hand, table[0:3])]
     
     elif round == 'turn':
-        if turn(hand, table[0:3]) == 100: #checks if the flop contained threes
+        if turn(hand, table[0:3]) == 100: #checks if the flop contained a flush
             probability = [flop(hand), 100, 100, 100]
-        elif river(hand, table[0:4]) == 100:#checks if the turn contained threes
+        elif river(hand, table[0:4]) == 100:#checks if the turn contained a flush
             probability = [flop(hand), turn(hand, table[0:3]), 100, 100]
         else:
             probability = [flop(hand), turn(hand, table[0:3]), river(hand, table[0:4]), river(hand, table[0:4])]
@@ -58,7 +58,7 @@ def turn(hand, table = 'n/a'):
         if process_flushes(suits, 4) == 1: #We have 4 cards of 1 suit making a flush possible
             turn_flush = 9 / 47
         else: #If we know the flop and don't have 4 cards of one suit a flush is impossible
-            turn_flush = 0
+            turn_flush = 100 if process_flushes(suits, 5) == 1 else 0
         
     return truncate(turn_flush)
 
@@ -80,13 +80,13 @@ def river(hand, table = 'n/a'):
         elif process_flushes(suits, 3) >= 1: #We have 3 cards of 1 suit
             river_flush = (10 / 47) * (9 / 46)
         else: #A flush is not possible or already exists
-            river_flush = 0 if process_flushes(suits, 5) == 0 else 100
+            river_flush = 100 if process_flushes(suits, 5) == 1 else 0
     else: #We have the turn available 
         suits = build_flushes(hand, table, 4)
         if process_flushes(suits, 4) >= 1: #We have 4 cards of 1 suit
             river_flush = 9 / 46
         else: #A flush is not possible or already exists
-            river_flush = 0 if process_flushes(suits, 5) == 0 else 100
+            river_flush = 100 if process_flushes(suits, 5) == 1 else 0
     return truncate(river_flush)
 
 def final_check(hand, table = 'n/a'):
