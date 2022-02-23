@@ -59,7 +59,7 @@ def turn(hand, table = 'n/a'):
         elif 1 in royal.values(): #checks if the player has 1 royal card
             turn_royal_flush = (4 / 19600) * (1 / 47)
         else: #a royal flush is not possible
-            turn_royal_flush = 0
+            turn_royal_flush = 100 if 5 in royal.values() else 0
 
     else: #flop is avialable 
         royal = royal_helper(hand, table, 3) #makes a dictionary of suits and royal ranks (key then value)
@@ -82,7 +82,7 @@ def river(hand, table = 'n/a'):
         if (royal['heart'] == 1 and royal['diamond'] == 1) or (royal['heart'] == 1 and royal['club'] == 1) \
            or (royal['heart'] == 1 and royal['spade'] == 1) or (royal['spade'] == 1 and royal['diamond'] == 1) \
            or (royal['spade'] == 1 and royal['club'] == 1) or (royal['club'] == 1 and royal['diamond'] == 1):
-            river_royal_flush = (((2 * 4) / 19600) * (47 / 47)  * (1 / 46))\
+            river_royal_flush = (((2 * 4) / 19600) * (46 / 47)  * (1 / 46))\
                 + (((2 * 6 * 47) / 19600) * (2 / 47) * (1 / 46)) + (((2 * 10) / 19600) * (2 / 47) * (1 / 46))
         elif 1 in royal.values(): #checks if the player has 1 royal card
             river_royal_flush = ((4 / 19600) * (47 / 47)  * (1 / 46))\
@@ -109,4 +109,4 @@ def river(hand, table = 'n/a'):
 
 def final_check(hand, table):
     """This function checks if by the end of the round if there is a royal flush"""
-    return 100 if 5 in royal_helper(hand, table, 5) else 0
+    return 100 if 5 in royal_helper(hand, table, 5).values() else 0

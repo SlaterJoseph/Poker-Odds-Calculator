@@ -77,14 +77,14 @@ from straight_helper import flop_helper
 # print(calculate_flush(hand, table, "river"))
 
 #testing royal flush
-hand = [Card("heart", 10), Card("heart", 11)]
+hand = [Card("heart", 10), Card("spade", 11)]
 table = []
 print(calculate_royal_flush(hand, table, "preflop"))
-table = [Card("heart", 1), Card("heart", 12), Card("heart", 13)]
+table = [Card("heart", 1), Card("spade", 12), Card("heart", 13)]
 print(calculate_royal_flush(hand, table, "flop"))
 table.append(Card("heart", 1))
 print(calculate_royal_flush(hand, table, "turn"))
-table.append(Card("heart", 2))
+table.append(Card("heart", 1))
 print(calculate_royal_flush(hand, table, "river"))
 
 #flush testing
