@@ -8,7 +8,7 @@ from fours_probability import  calculate_fours
 from fullhouse_probability import calculate_full_house
 from flush_probability import calculate_flush
 from royal_flush_probability import calculate_royal_flush
-from straight_helper import flop_helper
+from straight_probability import flop, turn
 
 #testing pair
 # hand = [Card("heart", 1), Card("heart", 2)]
@@ -77,15 +77,15 @@ from straight_helper import flop_helper
 # print(calculate_flush(hand, table, "river"))
 
 #testing royal flush
-hand = [Card("heart", 10), Card("spade", 11)]
-table = []
-print(calculate_royal_flush(hand, table, "preflop"))
-table = [Card("heart", 1), Card("spade", 12), Card("heart", 13)]
-print(calculate_royal_flush(hand, table, "flop"))
-table.append(Card("heart", 1))
-print(calculate_royal_flush(hand, table, "turn"))
-table.append(Card("heart", 1))
-print(calculate_royal_flush(hand, table, "river"))
+# hand = [Card("heart", 10), Card("spade", 11)]
+# table = []
+# print(calculate_royal_flush(hand, table, "preflop"))
+# table = [Card("heart", 1), Card("spade", 12), Card("heart", 13)]
+# print(calculate_royal_flush(hand, table, "flop"))
+# table.append(Card("heart", 1))
+# print(calculate_royal_flush(hand, table, "turn"))
+# table.append(Card("heart", 1))
+# print(calculate_royal_flush(hand, table, "river"))
 
 #flush testing
 # Debugging straight_helper -> flop
@@ -95,3 +95,7 @@ print(calculate_royal_flush(hand, table, "river"))
 #             continue
 #         hand = [Card('heart', x), Card('spade', y)]
 #         print('x: ',x, " y: ",y, " ",flop_helper(hand))
+
+hand = [Card("heart", 6), Card("heart", 7)]
+print(flop(hand))
+print(turn(hand))

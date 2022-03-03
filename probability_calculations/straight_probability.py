@@ -1,5 +1,6 @@
+from math import trunc
 from probability_helper import truncate
-from straight_helper import flop_helper
+from straight_helper import flop_straights_helper, turn_straight_helper_flopless
 
 def calculate_straight(hand, table, round):
     """This processes the probability of getting a straight
@@ -44,26 +45,27 @@ def calculate_straight(hand, table, round):
     
 def flop(hand):
     """This function returns the probability of getting a straight on the flop"""
-    possible_straights = flop_helper(hand) #checks how many possible straights can be amde
-    flop_straight = (possible_straights * 4 * 4 * 4) / 19600
-    return truncate(flop_straight)
+    flop_straight = (flop_straights_helper(hand) * 4 * 4 * 4) / 19600
+    return truncate(flop_straight) 
 
 def turn(hand, table = 'n/a'):
     """This function returns the probability of getting a straight on the turn"""
     if table == 'n/a': #No flop is available yet
-        
+        straights = turn_straight_helper_flopless(hand)
+        turn_straight = (((straights[0] * 4 * 4 * 8 * 4)/ 19600) * (4 / 47)) + (((straights[1] * 4 * 4 * 4) / 19600) * (4 / 47)) \
+            + (((straights[0] * 4 * 4 * 4 * 3)/ 19600) * (4 / 47))
     else:
-        
+        pass 
     return truncate(turn_straight)
 
 def river(hand, table = 'n/a'):
     """This function returns the probability of getting a straight on the river"""
     if table == 'n/a':
-
+        pass
     elif len(table) == 3:
-        
+        pass 
     else:
-        
+        pass  
     return truncate(river_straight)
 
 def final_check(hand, table = 'n/a'):
