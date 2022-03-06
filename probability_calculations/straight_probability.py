@@ -1,6 +1,6 @@
 from math import trunc
 from probability_helper import truncate
-from straight_helper import flop_straights_helper, turn_straight_helper_flopless
+from straight_helper import flop_straights_helper, turn_straight_helper_flopless, river_straight_helper_flopless, possible_straight_finder
 
 def calculate_straight(hand, table, round):
     """This processes the probability of getting a straight
@@ -52,16 +52,22 @@ def turn(hand, table = 'n/a'):
     """This function returns the probability of getting a straight on the turn"""
     if table == 'n/a': #No flop is available yet
         straights = turn_straight_helper_flopless(hand)
-        turn_straight = (((straights[0] * 4 * 4 * 8 * 4)/ 19600) * (4 / 47)) + (((straights[1] * 4 * 4 * 4) / 19600) * (4 / 47)) \
-            + (((straights[0] * 4 * 4 * 4 * 3)/ 19600) * (4 / 47))
+        turn_straight = (((straights[0] * 4 * 4 * 44) / 19600) * (4 / 47)) + (((straights[1] * 4 * 4 * 4) / 19600) * ( 4 / 47))
     else:
-        pass 
+        if possible_straight_finder(hand, table) == True: return 100
+        all_straights = possible_straight_finder(hand, table)
+        turn_straight = (all_straights[0] * 4) / 47 
     return truncate(turn_straight)
 
 def river(hand, table = 'n/a'):
     """This function returns the probability of getting a straight on the river"""
     if table == 'n/a':
-        pass
+        straights = river_straight_helper_flopless(hand)
+        river_straight = (((straights[2] * 4 * 4 * 44) / 19600) * (43 / 47) * (4 / 46))  \
+            + (((straights[2] * 4 * 44 * 43) / 19600) * (4 / 47) * (4 / 46)) \
+            + (((straights[1] * 4 * 4 * 4) / 19600) * (43 / 47) * (4 / 46)) \
+            + (((straights[1] * 4 * 4 * 40) / 19600) * (4 / 47) * (4 / 46)) \
+            + (((straights[0] * 4 * 4 * 4) / 19600) * (4 / 47) * (4 / 46))
     elif len(table) == 3:
         pass 
     else:

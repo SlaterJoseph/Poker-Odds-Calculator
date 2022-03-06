@@ -1,5 +1,3 @@
-import sys
-sys.path.append('../poker_components')
 from card import Card
 from pair_probability import calculate_pair
 from two_pair_probability import calculate_two_pair
@@ -8,7 +6,7 @@ from fours_probability import  calculate_fours
 from fullhouse_probability import calculate_full_house
 from flush_probability import calculate_flush
 from royal_flush_probability import calculate_royal_flush
-from straight_probability import flop, turn
+from straight_probability import flop, turn, river
 
 #testing pair
 # hand = [Card("heart", 1), Card("heart", 2)]
@@ -99,3 +97,4 @@ from straight_probability import flop, turn
 hand = [Card("heart", 6), Card("heart", 7)]
 print(flop(hand))
 print(turn(hand))
+print(river(hand))
