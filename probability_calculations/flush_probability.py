@@ -40,7 +40,7 @@ def flop(hand):
     """This function returns the probability of getting a flush on the flop"""
     suits = {hand[0].get_suit(), hand[1].get_suit()}
     if len(suits) == 1: #The hand cards are suited
-        flop_flush = 165 / 19600
+        flop_flush = 165 / 19600 #Flush - 1
     else: #If the hand is not suited a flush on the flop is impossible
         flop_flush = 0
     return truncate(flop_flush)
@@ -50,13 +50,13 @@ def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
         suits = {hand[0].get_suit(), hand[1].get_suit()}
         if len(suits) == 1: #The hand cards are suited
-            turn_flush = ((55 * 3 * 13) / 19600) * (9 / 47)
+            turn_flush = ((55 * 3 * 13) / 19600) * (9 / 47) #Flush - 2
         else: #The hand cards are not suited
-            turn_flush = ((2 * 66) / 19600) * (9 / 47)
+            turn_flush = ((2 * 66) / 19600) * (9 / 47) #Flush - 3
     else:
         suits = build_flushes(hand, table, 3)
         if process_flushes(suits, 4) == 1: #We have 4 cards of 1 suit making a flush possible
-            turn_flush = 9 / 47
+            turn_flush = 9 / 47 #Flush - 4
         else: #If we know the flop and don't have 4 cards of one suit a flush is impossible
             turn_flush = 100 if process_flushes(suits, 5) == 1 else 0
         
@@ -68,23 +68,24 @@ def river(hand, table = 'n/a'):
         suits = {hand[0].get_suit(), hand[1].get_suit()}
         if len(suits) == 1:
             river_flush = (((55 * 39) / 19600) * (38 / 47) * (9 / 46)) \
-                + (((11 * 741) / 19600) * (10 / 47) * (9 / 46)) + (((3 * 286) / 19600) * (10 / 47) * (9 / 46))
+                + (((11 * 741) / 19600) * (10 / 47) * (9 / 46)) + (((3 * 286) / 19600) * (10 / 47) * (9 / 46)) # Flush - 5
         else:
             river_flush = (((2 * 220) / 19600) * (39 / 47) * (9 / 46)) \
-                + (((2 * 66 * 39) / 19600) * (10 / 47) * (9 / 46)) + (((2 * 286) / 19600) * (10 / 47) * (9 / 46))
+                + (((2 * 66 * 39) / 19600) * (10 / 47) * (9 / 46)) + (((2 * 286) / 19600) * (10 / 47) * (9 / 46)) 
+                #Flush - 6
             
     elif len(table) == 3: #We have the flop available
         suits = build_flushes(hand, table, 3)
         if process_flushes(suits, 4) >= 1: #We have 4 cards of 1 suit
-            river_flush = (38 / 49) * (9 / 46)
+            river_flush = (38 / 49) * (9 / 46) #Flush - 7
         elif process_flushes(suits, 3) >= 1: #We have 3 cards of 1 suit
-            river_flush = (10 / 47) * (9 / 46)
+            river_flush = (10 / 47) * (9 / 46) #Flush - 8
         else: #A flush is not possible or already exists
             river_flush = 100 if process_flushes(suits, 5) == 1 else 0
     else: #We have the turn available 
         suits = build_flushes(hand, table, 4)
         if process_flushes(suits, 4) >= 1: #We have 4 cards of 1 suit
-            river_flush = 9 / 46
+            river_flush = 9 / 46 #Flush - 9
         else: #A flush is not possible or already exists
             river_flush = 100 if process_flushes(suits, 5) == 1 else 0
     return truncate(river_flush)

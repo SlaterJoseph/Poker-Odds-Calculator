@@ -46,9 +46,9 @@ def flop(hand):
     """This function checks the probability of getting four of a kind specifically on the flop"""
     ranks = {hand[0].get_value(), hand[1].get_value()}
     if len(ranks) == 1: #We have a pokcet pair
-        flop_fours = (12 * 4) / 19600
+        flop_fours = (12 * 4) / 19600 #Four of a kind - 1
     else: #Our hand did not contain a pocket pair
-        flop_fours = (2 * 4) / 19600
+        flop_fours = (2 * 4) / 19600 #Four of a kind - 2
     return truncate(flop_fours)
 
 def turn(hand, table = 'n/a'):
@@ -57,15 +57,15 @@ def turn(hand, table = 'n/a'):
         ranks = {hand[0].get_value(), hand[1].get_value()}
         if len(ranks) == 1: #We have a pokcet pair
             turn_fours  = (((2 * 66 * 4 * 4) / 19600) * (1 / 47)) + (((2 * 12 * 6) / 19600) * (1 / 47)) \
-                + (((12 * 4) / 19600) * (1 / 47))
+                + (((12 * 4) / 19600) * (1 / 47)) #Four of a kind - 3
         else: #Our hand did not contain a pocket pair
             turn_fours = (((2 * 3 * 3) / 19600) * ( 1 / 47)) \
                 + (((2 * 3 * 11 * 4) / 19600) * (1 / 47)) \
-                    + (((11 * 4) / 19600) * (1 / 47))
+                    + (((11 * 4) / 19600) * (1 / 47)) #Four of a kind - 4
     else: #We have the flop available 
         ranks = build_ranks(hand, table, 3)
         if process_matches(ranks, 3) >= 1: #This checks if our table contains 3s
-            turn_fours = 1 / 47
+            turn_fours = 1 / 47 #Four of a kind - 5
         else:  #We didn't find threes, making 4s impossible
             turn_fours = 0 if process_matches(ranks, 4) == 0 else 100
     return truncate(turn_fours)
@@ -81,42 +81,41 @@ def river(hand, table = 'n/a'):
                 + (((2 * 12 * 6) / 19600) * ((11 * 4) / 47) * (1 / 46)) \
                 + (((2 * 66 * 4 * 4) / 19600) * ((2 * 3) / 47) * (1 / 46)) \
                 + (((220 * 4 * 4 * 4) / 19600) * (2 / 47) * (1 / 46)) \
-                + (((66 * 2 * 6 * 4) / 19600) * ( 2 / 47) * (1 / 46)) \
-                + (((12 * 4) / 19600) * ((11 * 4) / 47) * (1 / 46)) \
-                + (((66 * 2 * 6 * 4) / 19600) * (2 / 47) * (1 / 46))
+                + (((66 * 6 * 4) / 19600) * (2 * 2 / 47) * (1 / 46)) \
+                + (((12 * 4) / 19600) * ((11 * 4) / 47) * (1 / 46)) #Four of a kind - 6
         else: #Our hand did not contain a pocket pair
             river_fours = (((2 * 3 * 3) / 19600) * (2 / 47) * (2 / 46)) \
                 + (((2 * 3 * 3) / 19600) * ((11 * 4) / 47) * (1 / 46)) \
                 + (((2 * 3 * 11 * 4) / 19600) * ((11 * 4) / 47) * (1 / 46)) \
                 + (((3 * 3 * 11 * 4) / 19600) * ((2 * 2) / 47) * (1 / 46)) \
-                + (((2 * 3 * 11 * 6) / 19600) * (2 / 47) * (1 / 46)) \
+                + (((2 * 3 * 11 * 6) / 19600) * (2 * 2 / 47) * (1 / 46)) \
                 + (((2 * 3 * 11 * 4) / 19600) * ((10 * 4) / 47) * (1 / 46)) \
                 + (((2 * 3 * 11 * 4) / 19600) * (3 / 47) * (1 / 46)) \
                 + (((2 * 3 * 55 * 4 * 4) / 19600) * (2 / 47) * (1 / 46)) \
                 + (((11 * 4) / 19600) * ((2 * 3) / 47) * (1 / 46)) \
                 + (((11 * 4) / 19600) * ((10 * 4) / 47) * (1 / 46)) \
-                + (((55 * 2 * 6 * 4) / 19600) * (2 / 47) * (1 / 46)) \
-                + (((11 * 6 * 2 * 3) / 19600) * (2 / 47) * (1 / 46)) 
+                + (((55 * 6 * 4) / 19600) * (2 / 47) * (1 / 46)) \
+                + (((11 * 6 * 2 * 3) / 19600) * (2 / 47) * (1 / 46)) #Four of a kind - 7
 
     elif len(table) == 3:
         ranks = build_ranks(hand, table, 3)
         if process_matches(ranks, 3) >= 1 and process_matches(ranks, 2) >= 1: #There is a full house inplay
-            river_fours = ((2 / 47) * (2 / 46)) + (((11 * 4) / 47) * (1 / 46))
+            river_fours = ((2 / 47) * (2 / 46)) + (((11 * 4) / 47) * (1 / 46)) #Four of a kind - 8
         elif process_matches(ranks, 3) >= 1: #There is just 3 of a kind (no additonal pair)
-            river_fours = (((2 * 3) / 47) * (1 / 46)) + (((10 * 4) / 47) * (1 / 46))
+            river_fours = (((2 * 3) / 47) * (1 / 46)) + (((10 * 4) / 47) * (1 / 46)) #Four of a kind - 9
         elif process_matches(ranks, 2) == 2: #There are 2 pairs
-            river_fours = ((2 * 2) / 47) * (1 / 46)
+            river_fours = ((2 * 2) / 47) * (1 / 46) #Four of a kind - 10
         elif process_matches(ranks, 2) == 1: #There is 1 pair
-            river_fours = (2 / 47) * (1 / 46)
+            river_fours = (2 / 47) * (1 / 46) #Four of a kind - 11
         else: #There are no pairs b
             river_fours = 0
         
     else: #This is for when the flop and turn are revealed
         ranks = build_ranks(hand, table, 4)
         if process_matches(ranks, 3) == 2: #We have two 3s
-            river_fours = 2 / 46
+            river_fours = 2 / 46 #Four of a kind - 12
         elif process_matches(ranks, 3) == 1: #We have one 3s
-            river_fours = 1 / 46
+            river_fours = 1 / 46 #Four of a kind - 13
         else: #Either we have no 3s or we have 4s, making the return 0 or 100
             river_fours = 100 if process_matches(ranks, 4) >= 1 else 0
     return truncate(river_fours)

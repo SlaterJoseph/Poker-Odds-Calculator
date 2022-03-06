@@ -15,7 +15,8 @@ king_straights = {9, 10}
 
 def set_return(value):
     """This takes a parameter of a value, then returns the set of all possible straights of that numbers,
-    so ace will return a set with length 2, four will return a set with length 4, 6 will return a set of length 5"""
+    so ace will return a set with length 2, four will return a set with length 4, 6 will return a set of length 5
+    (Look above/in the code to view the correlation of rank to possible straights"""
     if value == 1:
         return ace_straights
     elif value == 2:
