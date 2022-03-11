@@ -6,7 +6,7 @@ from fours_probability import  calculate_fours
 from fullhouse_probability import calculate_full_house
 from flush_probability import calculate_flush
 from royal_flush_probability import calculate_royal_flush
-from straight_probability import flop, turn, river
+from straight_probability import calculate_straight
 
 #testing pair
 # hand = [Card("heart", 1), Card("heart", 2)]
@@ -94,7 +94,13 @@ from straight_probability import flop, turn, river
 #         hand = [Card('heart', x), Card('spade', y)]
 #         print('x: ',x, " y: ",y, " ",flop_helper(hand))
 
-hand = [Card("heart", 6), Card("heart", 7)]
-print(flop(hand))
-print(turn(hand))
-print(river(hand))
+#testing straight
+hand = [Card("heart", 1), Card("spade", 2)]
+table = []
+print(calculate_straight(hand, table, "preflop"))
+table = [Card("heart", 1), Card("spade", 5), Card("heart", 13)]
+print(calculate_straight(hand, table, "flop"))
+table.append(Card("heart", 4))
+print(calculate_straight(hand, table, "turn"))
+table.append(Card("heart", 1))
+print(calculate_straight(hand, table, "river"))

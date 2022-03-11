@@ -1,7 +1,8 @@
+from running import running
 print(dir(__package__))
 
 def main():
-    pass
+    running
 
 if __name__ == '__main__':
     main()
