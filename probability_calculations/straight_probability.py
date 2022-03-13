@@ -53,28 +53,33 @@ def turn(hand, table = 'n/a'):
     if table == 'n/a': #No flop is available yet
         straights = turn_straight_helper_flopless(hand)
         turn_straight = (((straights[0] * 4 * 4 * 44) / 19600) * (4 / 47)) + (((straights[1] * 4 * 4 * 4) / 19600) * ( 4 / 47))
-    else:
+    else: #flop is avaliable
         if possible_straight_finder_four(hand, table) == True: return 100
-        all_straights = possible_straight_finder_four(hand, table)
+        all_straights = len(possible_straight_finder_four(hand, table))
         turn_straight = (all_straights * 4) / 47 
     return truncate(turn_straight)
 
 def river(hand, table = 'n/a'):
     """This function returns the probability of getting a straight on the river"""
-    if table == 'n/a':
+    if table == 'n/a': #no flop avialable
         straights = river_straight_helper_flopless(hand)
         river_straight = (((straights[2] * 4 * 4 * 44) / 19600) * (43 / 47) * (4 / 46))  \
             + (((straights[2] * 4 * 44 * 43) / 19600) * (4 / 47) * (4 / 46)) \
             + (((straights[1] * 4 * 4 * 4) / 19600) * (43 / 47) * (4 / 46)) \
             + (((straights[1] * 4 * 4 * 40) / 19600) * (4 / 47) * (4 / 46)) \
             + (((straights[0] * 4 * 4 * 4) / 19600) * (4 / 47) * (4 / 46))
-    elif len(table) == 3:
-        if possible_straight_finder_threes == True: return 100
+    elif len(table) == 3: #flop available
+        if possible_straight_finder_threes(hand, table) == True: return 100 #checks if we found a straight
         all_straights = possible_straight_finder_threes(hand, table)
-        river_straights = (((straights[1] * 4) / 47) * (4 / 46)) \
-            + (((47 - (all_straights[0] * 4)) * ((all_straights[0] * 4) / 46)))
-    else:
-        all_straights = possible_straight_finder_four(hand, table, True)  
+        river_straight = 0 
+        if len(all_straights[1]) != 0: river_straight += ((len(all_straights[1]) * 4) / 47) * (4 / 46)
+        if len(all_straights[0]) != 0: river_straight += ((47 - (len(all_straights[0]) * 4)) / 47) \
+            * ((len(all_straights[0]) * 4) / 46)
+        
+
+    else: #turn available
+        if possible_straight_finder_four(hand, table, True) == True: return 100 #checks if we found a straight
+        all_straights = len(possible_straight_finder_four(hand, table, True))
         river_straight = (all_straights * 4) / 46
     return truncate(river_straight)
 

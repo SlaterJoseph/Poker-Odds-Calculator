@@ -99,14 +99,14 @@ def royal_helper(hand, table, cards_in_play) -> dict:
 
 def check_straight(hand, table):
     """This function checks if by the end of a round if there are any starights"""
-    cards = set;
-    cards.add(hand[0].get_rank())
-    cards.add(hand[1].get_rank())
-    cards.add(table[0].get_rank())
-    cards.add(table[1].get_rank())
-    cards.add(table[2].get_rank())
-    cards.add(table[3].get_rank())
-    cards.add(table[4].get_rank())
+    cards = set();
+    cards.add(hand[0].get_value())
+    cards.add(hand[1].get_value())
+    cards.add(table[0].get_value())
+    cards.add(table[1].get_value())
+    cards.add(table[2].get_value())
+    cards.add(table[3].get_value())
+    cards.add(table[4].get_value())
 
     for x in cards:
         if x+1 in cards and x+2 in cards and x+3 in cards and x+4 in cards: return 100

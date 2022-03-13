@@ -46,7 +46,7 @@ def possible_straight_finder_four(hand, table, turn = False):
     available_ranks.add(table[0].get_value())
     available_ranks.add(table[1].get_value())
     available_ranks.add(table[2].get_value())
-    if turn: available_ranks(table[3].get_value()) #adds the turn
+    if turn: available_ranks.add(table[3].get_value()) #adds the turn
 
     needed_cards = set() #A set to prevent a card which completes multiple straights form being counted twice
     missing_num = 0 
@@ -86,7 +86,7 @@ def possible_straight_finder_four(hand, table, turn = False):
     if total_counter == 5: return True
     if total_counter == 4: needed_cards.add(missing_num)
         
-    return (len(needed_cards))
+    return (needed_cards)
 
 def possible_straight_finder_threes(hand, table):
     """This function checks all possible straight draws and adds them to a counter. If a straight is detected the function
@@ -94,7 +94,6 @@ def possible_straight_finder_threes(hand, table):
     another function is called which checks for duplicates of 3s in 4, then removes them from 3s. Finally the length of 3s and 4s
     is returned"""
     set_4s = possible_straight_finder_four(hand, table) #will be used later to removes duplicates
-
     available_ranks = set() #makes a set to store all ranks, then add all ranks in the hand and table
     available_ranks.add(hand[0].get_value())
     available_ranks.add(hand[1].get_value())
@@ -157,16 +156,16 @@ def possible_straight_finder_threes(hand, table):
     if total_counter == 5: return True
     add_to_set = (missing_num1, missing_num2)
     if total_counter == 3: needed_cards.add(frozenset(add_to_set))
-
-    return double_check_straights(set_4s, needed_cards)
+    double_check_straights(set_4s, needed_cards)
+    return (set_4s, needed_cards)
 
 def double_check_straights(set_4s, set_3s):
     """This function removes any sets from 3s which would be included in 4s. So if 3s has a set of 
     4:8, but 4s has 8 (so that for example 5:6:7:9 is avialable), then 4:8 is not needed as 8 itself makes a straight"""
+    if len(set_4s) == 0: return
     set_3_list = list(set_3s)
-
     for x in set_3_list:
-        card_list = list(set_3_list[x])
+        card_list = list(x)
         if card_list[0] in set_4s or card_list[1] in set_4s: 
             set_3s.remove(x) #If 1 number in set 3s already makes a straight without a number in set 4s it is not needed
 

@@ -95,12 +95,12 @@ from straight_probability import calculate_straight
 #         print('x: ',x, " y: ",y, " ",flop_helper(hand))
 
 #testing straight
-hand = [Card("heart", 1), Card("spade", 2)]
+hand = [Card("heart", 4), Card("spade", 5)]
 table = []
 print(calculate_straight(hand, table, "preflop"))
-table = [Card("heart", 1), Card("spade", 5), Card("heart", 13)]
+table = [Card("heart", 6), Card("spade", 5), Card("heart", 6)]
 print(calculate_straight(hand, table, "flop"))
-table.append(Card("heart", 4))
+table.append(Card("heart", 7))
 print(calculate_straight(hand, table, "turn"))
-table.append(Card("heart", 1))
+table.append(Card("heart", 8))
 print(calculate_straight(hand, table, "river"))
