@@ -1,6 +1,6 @@
 from probability_helper import truncate, check_straight
 from straight_helper import flop_straights_helper, turn_straight_helper_flopless, river_straight_helper_flopless, \
-    possible_straight_finder_four, possible_straight_finder_threes
+possible_straight_finder_four, possible_straight_finder_threes
 
 def calculate_straight(hand, table, round):
     """This processes the probability of getting a straight
@@ -74,8 +74,7 @@ def river(hand, table = 'n/a'):
         river_straight = 0 
         if len(all_straights[1]) != 0: river_straight += ((len(all_straights[1]) * 4) / 47) * (4 / 46)
         if len(all_straights[0]) != 0: river_straight += ((47 - (len(all_straights[0]) * 4)) / 47) \
-            * ((len(all_straights[0]) * 4) / 46)
-        
+        * ((len(all_straights[0]) * 4) / 46)
 
     else: #turn available
         if possible_straight_finder_four(hand, table, True) == True: return 100 #checks if we found a straight

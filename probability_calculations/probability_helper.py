@@ -112,3 +112,12 @@ def check_straight(hand, table):
         if x+1 in cards and x+2 in cards and x+3 in cards and x+4 in cards: return 100
 
     return 0
+
+def process_flushes_suit(flushes, searching_num) -> str:
+    """This function takes a ranks of suits, and searches for a specific value (both parameters). If the value is found,
+    a counter is incremented, and once all suits are checked the counter is returned"""
+    checked_value = 0
+    if flushes['heart'] == searching_num: return 'heart'
+    if flushes['spade'] == searching_num: return 'spade'
+    if flushes['club'] == searching_num: return 'club'
+    if flushes['diamond'] == searching_num: return 'diamond'

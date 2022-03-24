@@ -1,5 +1,8 @@
 from all_straight_for_card import set_return
 
+def rank_to_set(rank):
+    return set_return(rank)
+
 def flop_straights_helper(hand):
     """This takes a hand and returns the intersection of all possible straights of those cards. Only straights missing 3
     cards can be obtained on the flop"""
@@ -34,13 +37,15 @@ def river_straight_helper_flopless(hand):
     all_straights = set.union(card_1_sets, card_2_sets)
     simple_straights = set.intersection(card_1_sets, card_2_sets)
     return [10 - len(all_straights), len(all_straights) - len(simple_straights), len(simple_straights)]
-
+    #index 0 - hard : index 1 - medium : index 2 - easy
+    
 def possible_straight_finder_four(hand, table, turn = False):
     """This function checks all possible straight draws and adds them to a counter. If a straight is detected the function
     returns true. If no straight is detected a, every missing num which will complete a straight is added to a set. At the
     end of the function the len of the set is returned, which is the number of missing ranks which would complete a straight
     """
     available_ranks = set() #makes a set to store all ranks, then add all ranks in the hand and table
+
     available_ranks.add(hand[0].get_value())
     available_ranks.add(hand[1].get_value())
     available_ranks.add(table[0].get_value())
@@ -86,7 +91,7 @@ def possible_straight_finder_four(hand, table, turn = False):
     if total_counter == 5: return True
     if total_counter == 4: needed_cards.add(missing_num)
         
-    return (needed_cards)
+    return needed_cards
 
 def possible_straight_finder_threes(hand, table):
     """This function checks all possible straight draws and adds them to a counter. If a straight is detected the function

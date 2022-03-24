@@ -7,6 +7,7 @@ from fullhouse_probability import calculate_full_house
 from flush_probability import calculate_flush
 from royal_flush_probability import calculate_royal_flush
 from straight_probability import calculate_straight
+from straight_flush_probability import flop, turn
 
 #testing pair
 # hand = [Card("heart", 1), Card("heart", 2)]
@@ -42,14 +43,14 @@ from straight_probability import calculate_straight
 # print(calculate_threes(hand, table, "river"))
 
 #testing 4s
-# hand = [Card("heart", 1), Card("heart", 2)]
+# hand = [Card("heart", 2), Card("spade", 2)]
 # table = []
 # print(calculate_fours(hand, table, "preflop"))
-# table = [Card("heart", 2), Card("heart", 1), Card("heart", 2)]
+# table = [Card("heart", 3), Card("heart", 4), Card("heart", 5)]
 # print(calculate_fours(hand, table, "flop"))
-# table.append(Card("heart", 3))
+# table.append(Card("diamond", 2))
 # print(calculate_fours(hand, table, "turn"))
-# table.append(Card("heart", 1))
+# table.append(Card("club", 2))
 # print(calculate_fours(hand, table, "river"))
 
 #testing full house
@@ -95,12 +96,19 @@ from straight_probability import calculate_straight
 #         print('x: ',x, " y: ",y, " ",flop_helper(hand))
 
 #testing straight
-hand = [Card("heart", 4), Card("spade", 5)]
-table = []
-print(calculate_straight(hand, table, "preflop"))
-table = [Card("heart", 6), Card("spade", 5), Card("heart", 6)]
-print(calculate_straight(hand, table, "flop"))
-table.append(Card("heart", 7))
-print(calculate_straight(hand, table, "turn"))
-table.append(Card("heart", 8))
-print(calculate_straight(hand, table, "river"))
+# hand = [Card("heart", 4), Card("spade", 5)]
+# table = []
+# print(calculate_straight(hand, table, "preflop"))
+# table = [Card("heart", 6), Card("spade", 5), Card("heart", 6)]
+# print(calculate_straight(hand, table, "flop"))
+# table.append(Card("heart", 7))
+# print(calculate_straight(hand, table, "turn"))
+# table.append(Card("heart", 8))
+# print(calculate_straight(hand, table, "river"))
+
+#testing straight flush
+hand = [Card("heart", 5), Card("spade", 7)]
+print(flop(hand))
+print(turn(hand))
+table = [Card("heart", 6), Card("spade", 7), Card("heart", 4)]
+print(turn(hand, table))
