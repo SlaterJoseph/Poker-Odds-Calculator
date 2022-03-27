@@ -77,8 +77,8 @@ def river(hand, table = 'n/a'):
         * ((len(all_straights[0]) * 4) / 46)
 
     else: #turn available
-        if possible_straight_finder_four(hand, table, True) == True: return 100 #checks if we found a straight
-        all_straights = len(possible_straight_finder_four(hand, table, True))
+        if possible_straight_finder_four(hand, table) == True: return 100 #checks if we found a straight
+        all_straights = len(possible_straight_finder_four(hand, table))
         river_straight = (all_straights * 4) / 46
     return truncate(river_straight)
 

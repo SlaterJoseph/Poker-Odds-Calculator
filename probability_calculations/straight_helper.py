@@ -39,19 +39,17 @@ def river_straight_helper_flopless(hand):
     return [10 - len(all_straights), len(all_straights) - len(simple_straights), len(simple_straights)]
     #index 0 - hard : index 1 - medium : index 2 - easy
     
-def possible_straight_finder_four(hand, table, turn = False):
+def possible_straight_finder_four(hand, table):
     """This function checks all possible straight draws and adds them to a counter. If a straight is detected the function
     returns true. If no straight is detected a, every missing num which will complete a straight is added to a set. At the
     end of the function the len of the set is returned, which is the number of missing ranks which would complete a straight
     """
     available_ranks = set() #makes a set to store all ranks, then add all ranks in the hand and table
 
-    available_ranks.add(hand[0].get_value())
-    available_ranks.add(hand[1].get_value())
-    available_ranks.add(table[0].get_value())
-    available_ranks.add(table[1].get_value())
-    available_ranks.add(table[2].get_value())
-    if turn: available_ranks.add(table[3].get_value()) #adds the turn
+    hand.extend(table)
+    
+    for card in hand: #Loops throught the cards and adds the ranks to our set
+        available_ranks.add(card.get_value())
 
     needed_cards = set() #A set to prevent a card which completes multiple straights form being counted twice
     missing_num = 0 

@@ -11,7 +11,7 @@ from straight_flush_probability import flop, turn
 
 #testing pair
 # hand = [Card("heart", 1), Card("heart", 2)]
-# table = []
+# table = list()
 # print(calculate_pair(hand, table, "preflop"))
 # table = [Card("heart", 1), Card("heart", 4), Card("heart", 5)]
 # print(calculate_pair(hand, table, "flop"))
@@ -107,8 +107,8 @@ from straight_flush_probability import flop, turn
 # print(calculate_straight(hand, table, "river"))
 
 #testing straight flush
-hand = [Card("heart", 5), Card("spade", 7)]
-print(flop(hand))
-print(turn(hand))
-table = [Card("heart", 6), Card("spade", 7), Card("heart", 4)]
-print(turn(hand, table))
+# hand = [Card("heart", 5), Card("spade", 7)]
+# print(flop(hand))
+# print(turn(hand))
+# table = [Card("heart", 6), Card("spade", 7), Card("heart", 4)]
+# print(turn(hand, table))

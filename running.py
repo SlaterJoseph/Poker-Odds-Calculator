@@ -1,6 +1,17 @@
-def running():
-    """This method selects which mode to run. If the input is 1 it is simulation mode. If it is 2 it is probabiltiy mode"""
-    mode_select = int(input('If 1 in putting the program goes into simulation mode. If 2 is inputed the program goes into probability mode'))
+def simulation():
+    """This function is called to run simulation mode"""
+    simulation_count = int(input('How many games do you wish to process?'))
+    if simulation_count > 1000:
+        confirm = str(input('A simulation of', simulation_count, 'may take considerable time. Are you sure? (Yes or No)'))
+        if str.lower(confirm) == 'no':
+            simulation()
+        if str.lower(confirm) != 'yes':
+            print('Invalid input. Resetting')
+            simulation()
+    
+    #Code to run simulation here
 
-    while mode_select < 1 or mode_select > 4:
-        mode_select = int(input('Invalid input. Please input a number 1 - 4 (1 for simulation, 2 for probability'))
+def probability():
+    """This function is called to run probability mode"""
+    print('As of now, you cannot choose the cards. They are distributed at random')
+    #code to run probability here
