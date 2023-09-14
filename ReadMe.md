@@ -25,6 +25,8 @@ The math behind all the probability calculations can be found [here](https://doc
 is a name and number, which you lookup in the document. So for Flush - 1, click Flush 1 on the side bar and 
 it will bring you to a detailed explanation. 
 
+UPDATE -- Not all the probabilities and as the notebook containing them was destroyed, they likely never will be. The more complex ones are however, so that will have to suffice
+
 Some of the probabilities found here are higher then numbers found online. This is because I am counting community
 hands. So, generally the odds of flopping a pair is approximitly 32% according to resources online, however this does not 
 account for if the flop itself contains a pair. That increases the total to approximitly 38%. I am also including hands
